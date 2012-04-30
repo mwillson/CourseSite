@@ -1,0 +1,136 @@
+/* My custom stylesheet */
+
+/* Use Bootstrap's Style Sheet */
+
+@import url(bootstrap.css);
+@import url(bootstrap-responsive.css);
+
+/* Now my custom styles */
+
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+/*  background-color: #83F52C;*/
+}
+
+.sidebar-nav {
+  padding: 9px 0;
+}
+
+.navbar-inner, .navbar .nav .active > a, .navbar-fixed-top .container-fluid {
+color: #83F52C;
+z-index: 1;
+background-color: black;  
+background-repeat: repeat-x; 
+}
+
+.navbar .nav {
+float: right;
+}
+
+.navbar .nav > li {
+color: #83F52C;
+z-index: 20;
+background-color: black;  
+background-repeat: repeat-x; 
+font-family: "Lucida Console", Monaco, monospace;
+}
+
+.navbar > ul{
+left:30%;
+}
+
+.logo {
+position: fixed;
+top: 0;
+left: 0;
+z-index: 5;
+}
+
+.navbar .brand {
+color: #000000;
+}
+
+
+.row-fluid {
+padding: 20px 0;
+}
+
+.span3, .span9 {
+z-index: 0;
+border: 2px solid;
+border-radius: 5px;
+-moz-border-radius: 5px; /* Firefox 3.6 and earlier */
+}
+
+.span3 {
+border-color: #eeeeee;
+}
+
+.row-fluid>.span9 {
+width:73%;
+}
+
+.hero-unit, .well, p {
+margin-bottom: 0px;
+font-family: "Lucida Console", Monaco, monospace;
+text-align: center;
+}
+
+.hero-unit {
+background: rgba(255, 255, 255, 0.7);
+}
+
+.row-fluid>.span5 {
+margin-left: 60% !important;
+padding:0px;
+border:0px solid;
+margin-left:1%;
+text-align: center;
+}
+
+.ign {
+padding: 0px;
+}
+
+#bg {
+position:fixed; 
+top:0; 
+left:0; 
+width:100%; 
+height:100%
+z-index:-1;
+}
+
+#home {
+position:relative; 
+z-index:1;
+}
+
+.well{
+background-color: #000000;
+color: #ffffff;
+padding-left: 4px;
+}
+
+/*.carousel-inner {
+height:280px;
+width:320px;
+}*/
+
+.carousel .item>img {
+display: inline-block;
+} 
+
+label {
+color: #ffffff;
+}
+
+hr {
+color: black;
+background-color: black;
+}
+
+p>b {
+color: black;
+}

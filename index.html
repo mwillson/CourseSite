@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Mark Willson | Code Foo Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="assets/img/ign_logo.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+	
+  </head>
+
+  <body data-spy="scroll">
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <img class="logo" src="assets/img/brand2.png" alt="Mark Willson" height="26%" width="26%" />
+		  <a class="brand" href="#">Mark Willson blah blah</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#home">Home</a></li><li><a>|</a></li>
+			  <li><a href="#bus">Ping Pong Ball Bus</a></li><li><a>|</a></li>
+  			  <li><a href="#layout">Fluid Layout</a></li><li><a>|</a></li>
+              <li><a href="#lplate">License Plates</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+	
+	<div id="bg"><img src="assets/img/Super_Mario_World_Desktop.png" width="100%" height="100%" alt=""></div>
+	
+    <div class="container-fluid" id="home">
+	
+	  <!-- Row 0 - About and Video -->
+      <div class="row-fluid ign">
+		<div class="span5">
+		  <img src="assets/img/code_foo_ign.png" width="50%" height="50%" alt="">
+		</div>
+      </div><!--/row0-->
+	
+	  <!-- Row 1 - About and Video -->
+      <div class="row-fluid">
+		<div class="span3">
+          <div class="well sidebar-nav">
+		    <h3>About Me</h3>
+            <p>Hello, IGN! My name is Mark Willson. I am a Cognitive Science major at the State University of New York at Oswego. My main interests are Computer Science and Philosophy. I love thinking about thinking, and I am very interested in social media. I also love thinking about movies, music and video games! Oh, and I have a sweet beard sometimes too. ;)</p>
+          </div><!--/.well -->
+        </div><!--/span3-->
+		
+        <div class="span9">
+          <div class="hero-unit">
+		   <iframe width="560" height="315" src="http://www.youtube.com/embed/u8tbX60N_SU" frameborder="0" allowfullscreen></iframe>
+          </div>
+		  <div id="bus"></div>
+        </div><!--/span9-->
+      </div><!--/row1-->
+
+	  <!-- Row 2 - Bus Problem -->
+      <div class="row-fluid">
+		<div class="span3">
+          <div class="well sidebar-nav">
+		  <h4><img src="assets/img/ball1.png" alt="?" /> How many ping pong balls would it take to fill an average-sized school bus? Describe each step in your thought process. </h4>
+	      </div><!--/.well -->
+        </div><!--/span3-->
+		
+        <div class="span9">
+          <div class="hero-unit">
+            
+			<div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="assets/img/pong_ball_measured.png" class="carimg" alt="">
+				<img src="assets/img/school_bus.jpeg" class="carimg" alt="">
+                <div class="carousel-caption">
+				  <h4>1. Measurements</h4>
+                  <h4>First we need to know how big a ping pong ball and a school bus are.</h4>
+                </div>
+              </div>
+              <div class="item">
+                <img src="assets/img/5_pong_balls.png" class="carimg" alt="">
+                <div class="carousel-caption">
+				  <h4>2. Arrangement</h4>
+                  <h4>Next, we need to determine how the ping pong balls will be arranged to fit to maximize volume. What happens to work out well is a cube of three layers consisting of 5 balls, 4 balls, and 5 balls respectively. Each side looks like this.</h4>
+                </div>
+              </div>
+			  <div class="item">
+                <img src="assets/img/5_balls_measured.png" class="carimg" alt="">
+                <div class="carousel-caption">
+				  <h4>3. Trigonometry</h4>
+                  <h4>With a little bit of math, we can determine the length of a side of this cube.</h4>
+                </div>
+              </div>
+              <div class="item">
+                <img src="assets/img/school_bus_measured.png" class="carimg" alt="">
+                <div class="carousel-caption">
+				  <h4>4. Divy up the Space</h4>
+                  <h4>Now we imagine a school bus as a rectangular prism, and for convenience two of its dimensions are roughly 1 meter. </h4>
+                </div>
+              </div>
+			  <div class="item">
+                <img src="assets/img/measurements.png" class="carimg" alt="">
+                <div class="carousel-caption">
+				  <h4>5. Calculate our Cubes</h4>
+                  <h4>If we take our two same-sized dimensions of the prism to be made up of 12 cubes each, we can divide the volume by those two lengths, and determine how long the other side should be, which in our case is 68.6 meters. Dividing this by the length of a cube, we can now find the number of cubes that can fit along our third side.</h4>
+                </div>
+              </div>
+			  <div class="item">
+                <img src="assets/img/tally.png" class="carimg" alt="">
+                <div class="carousel-caption">
+				  <h4>6. Tally up the Numbers</h4>
+                  <h4>Now that we know how many of our packed cubes can fit into our prism, we can do some quick calculations to figure out the number of balls!</h4>
+                </div>
+              </div>
+			  <div class="item">
+                <img src="assets/img/4_balls.png" class="carimg" alt="">
+                <div class="carousel-caption">
+				  <h4>7. Precision/Accuracy</h4>
+                  <h4>If my calculations are precise, there is a bit of room leftover at the end: just enough to fit one 12 by 12 row of 4-ball groups. This would add 576(144*4) balls to our total bringing it to 1,629,504!</h4>
+                </div>
+              </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+          </div>
+			
+          </div>
+		  <div id="layout"></div>
+        </div><!--/span9-->
+      </div><!--/row2-->
+	  
+	  <!-- Row 3 - Fluid Layout -->
+      <div class="row-fluid">
+		<div class="span3">
+          <div class="well sidebar-nav">
+		  <h4><img src="assets/img/ball1.png" alt="?" /> Create a liquid layout with HTML, CSS, and Javascript. This layout must support the following resolutions: 1024x768, 1680x1050. Explain why you would use a liquid layout. </h4>
+	      </div><!--/.well -->
+        </div><!--/span3-->
+		
+        <div class="span9">
+          <div class="hero-unit">
+            <div class="well">
+			<h4>There are so many different device/browser combinations it's mind boggling. Practically every single person's setup for veiwing web content is unique.
+			    When one is designing a website, it is important that it work with all possible (or at the very least, likely) combinations. A liquid layout based on
+				scaling objects via screen percentages is a nice way to make sure your content looks consistent across platforms!</h4>
+			</div>
+          </div>
+		  <div id="lplate"></div>
+        </div><!--/span9-->
+      </div><!--/row3-->
+	  
+	  <!-- Row 4 - License Plate Problem -->
+      <div class="row-fluid">
+		<div class="span3">
+          <div class="well sidebar-nav">
+		  <h4><img src="assets/img/ball1.png" alt="?" /> You own a license plate manufacturing company. Write a program that takes a population and determines the simplest pattern that will produce enough unique plates. Since all the plates that match the pattern will be generated, find the pattern that produces the least excess plates. Use a combination of letters (A-Z) and numbers (0-9).</h4>
+	      </div><!--/.well -->
+        </div><!--/span3-->
+		
+        <div class="span9">
+          <div class="hero-unit">
+          <form name="popform" class="well">
+			<label>Population</label>
+			<input name="popinput" type="text" class="span3" placeholder="Enter a number…">
+			<button type="button" class="btn" onclick="displayPop(this.form)">Submit</button>
+			<label name="poplabel" id="poplabel">Number of Plates</label>
+			<label name="excess" id="excess">Number of Excess Plates</label>
+			<label name="numbers" id="numbers">Number of  Numbers</label>
+			<label name="letters" id="letters">Number of  Letters</label>
+		  </form>
+          </div>
+        </div><!--/span9-->
+      </div><!--/row4-->
+
+	  <hr>
+
+      <footer>
+        <p><b>&copy; Mark Willson 2012</b></p>
+		<p><b>Powered By <a href="http://twitter.github.com/bootstrap/index.html">Twitter Bootstrap</a></b></p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+	<script src="assets/js/licenseplate.js"></script>
+
+  </body>
+</html>
