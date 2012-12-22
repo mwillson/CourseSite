@@ -1,0 +1,137 @@
+(defun mc ()
+  (establish-world)
+  (init-move-list)
+  (make-moves)
+)
+
+(defun establish-world ()
+  (setf *left-bank* '(M M M C C C B))
+  (setf *right-bank* nil)
+)
+
+(defun init-move-list ()
+  (setf *move-list* nil)
+)
+
+(defun make-moves ()
+  (display-world)
+  (cond
+    ( (goalp)
+	  (write-line "good work!")
+	  nil
+	)
+	( (feast-state-p)
+	  (write-line "yummy yummy yummy, I got good in my tummy!!")
+	  nil
+	)
+	( t
+	  (let ( (m (read)))
+	    (if (applicable-p m)
+		  (let () (perform-move m) (make-moves))
+		  (let () (write-line "move-inapplicable") nil)
+		)
+	  )
+	)
+  )
+)
+
+(defun perform-move (move)
+  (setf *move-list* (snoc move *move-list*))
+  (if (equal (current-bank) *left-bank*)
+    (move-lr move)
+    (move-rl move)
+  )
+)
+
+(defun move-lr (ml)
+  (if (null ml) (return-from move-lr))
+  (move-lr-1 (first ml))
+  (move-lr (rest ml))
+)  
+
+(defun move-rl (ml)
+  (if (null ml) (return-from move-rl))
+  (move-rl-1 (first ml))
+  (move-rl (rest ml))
+)  
+
+(defun move-lr-1 (item)
+  (setf *left-bank* (remove item *left-bank* :count 1))
+  (setf *right-bank* (snoc item *right-bank*))
+)
+
+(defun move-rl-1 (item)
+  (setf *right-bank* (remove item *right-bank* :count 1))
+  (setf *left-bank* (snoc item *left-bank*))
+)
+
+; applicable-p determine if all elements of list m exist in current bank
+
+(defun applicable-p (m)
+  (cond
+	((and (>= (count 'm (current-bank)) (count 'm m) ) 
+	      (>= (count 'c (current-bank)) (count 'c m) )
+          (not (and (= 0 (count 'm m)) (= 0 (count 'c m))))
+		  (<= (list-length m) 3)
+          (equal 1 (count 'b m)) )
+	  t
+	)
+	(t
+	  nil
+	)
+  )
+)
+
+(defun goalp ()
+  (cond
+    ((equal *left-bank* nil)
+	  t
+	)
+	(t
+	  nil
+	)
+  )
+)
+
+(defun feast-state-p ()
+  (cond
+    ((or (and (> (count 'c *left-bank*) (count 'm *left-bank*) ) (not (equal 0 (count 'm *left-bank*)))) 
+	     (and (> (count 'c *right-bank*) (count 'm *right-bank*) ) (not (equal 0 (count 'm *right-bank*)))) )  
+	  t
+	)
+	(t
+      nil
+	)
+  )
+)
+
+(defun current-bank ()
+  (cond
+    ((equal (find 'b *left-bank*) 'b)
+	  *left-bank*
+	)
+	(t
+	  *right-bank*
+	)
+  )
+)
+
+(defun display-world ()
+  (prin1 "*left-bank*    ")
+  (prin1 *left-bank*)
+  (terpri)
+  (prin1 "*right-bank*   ")
+  (prin1 *right-bank*)
+  (terpri)
+)
+
+(defun snoc (x lst)
+  (cond
+    ((null lst)
+	  (list x)
+	)
+	(t
+	  (cons (car lst) (snoc x (cdr lst)))
+	)
+  )
+)

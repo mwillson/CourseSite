@@ -1,0 +1,78 @@
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "mc.lsp")
+;; Loading file mc.lsp ...
+;; Loaded file mc.lsp
+T
+[2]> (mc)
+"*left-bank*    "(M M M C C C B)
+"*right-bank*   "NIL
+(m c b)
+"*left-bank*    "(M M C C)
+"*right-bank*   "(M C B)
+(m b)
+"*left-bank*    "(M M C C M B)
+"*right-bank*   "(C)
+(c c b)
+"*left-bank*    "(M M M)
+"*right-bank*   "(C C C B)
+(c b)
+"*left-bank*    "(M M M C B)
+"*right-bank*   "(C C)
+(m m b)
+"*left-bank*    "(M C)
+"*right-bank*   "(C C M M B)
+(m c b)
+"*left-bank*    "(M C M C B)
+"*right-bank*   "(C M)
+(m m b)
+"*left-bank*    "(C C)
+"*right-bank*   "(C M M M B)
+(c b)
+"*left-bank*    "(C C C B)
+"*right-bank*   "(M M M)
+(c c b)
+"*left-bank*    "(C)
+"*right-bank*   "(M M M C C B)
+(c b)
+"*left-bank*    "(C C B)
+"*right-bank*   "(M M M C)
+(c c b)
+"*left-bank*    "NIL
+"*right-bank*   "(M M M C C C B)
+good work!
+NIL
+[3]> (mc)
+"*left-bank*    "(M M M C C C B)
+"*right-bank*   "NIL
+(m b)
+"*left-bank*    "(M M C C C)
+"*right-bank*   "(M B)
+yummy yummy yummy, I got good in my tummy!!
+NIL
+[4]> (mc)
+"*left-bank*    "(M M M C C C B)
+"*right-bank*   "NIL
+(m c b)
+"*left-bank*    "(M M C C)
+"*right-bank*   "(M C B)
+(c c b)
+move-inapplicable
+NIL
+[5]>

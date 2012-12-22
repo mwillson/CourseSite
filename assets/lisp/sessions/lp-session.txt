@@ -1,0 +1,112 @@
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (car '(Blue Red Yellow))
+BLUE
+[2]> (cdr '(Blue Red Yellow))
+(RED YELLOW)
+[3]> (car '((1 2) Buckle My Shoe))
+(1 2)
+[4]> (cdr '((1 2) Buckle My Shoe))
+(BUCKLE MY SHOE)
+[5]> (car '("Sunshine"))
+"Sunshine"
+[6]> (cdr '("Sunshine"))
+NIL
+[7]> (cons 'Espresso '(Latte Cappucino))
+(ESPRESSO LATTE CAPPUCINO)
+[8]> (cons '(A B C) '(1 2 3))
+((A B C) 1 2 3)
+[9]> (cons 'Friday ())
+(FRIDAY)
+[10]> (setf oo-languages '(Simula Smalltalk Java CLOS))
+(SIMULA SMALLTALK JAVA CLOS)
+[11]> oo-languages
+(SIMULA SMALLTALK JAVA CLOS)
+[12]> 'oo-languages
+OO-LANGUAGES
+[13]> (car oo-languages)
+SIMULA
+[14]> (cdr oo-languages)
+(SMALLTALK JAVA CLOS)
+[15]> (cadr oo-languages)
+SMALLTALK
+[16]> (cdr (cdr oo-languages))
+(JAVA CLOS)
+[17]> (first oo-languages)
+SIMULA
+[18]> (second oo-languages)
+SMALLTALK
+[19]> (third oo-languages)
+JAVA
+[20]> (nth 2 oo-languages)
+JAVA
+[21]> (setf numbers '(1 2 3))
+(1 2 3)
+[22]> (setf letters '(a b c))
+(A B C)
+[23]> (cons numbers letters)
+((1 2 3) A B C)
+[24]> (list numbers letters)
+((1 2 3) (A B C))
+[25]> (append numbers letters)
+(1 2 3 A B C)
+[26]> (list letters (cdr letters) (cddr letters))
+((A B C) (B C) (C))
+[27]> (append letters (cdr letters) (cddr letters))
+(A B C B C C)
+[28]> (setf colors '(green orange blue))
+(GREEN ORANGE BLUE)
+[29]> 'colors
+COLORS
+[30]> colors
+(GREEN ORANGE BLUE)
+[31]> (describe 'colors)
+
+COLORS is the symbol COLORS, lies in #<PACKAGE COMMON-LISP-USER>, is
+accessible in 1 package COMMON-LISP-USER, a variable, value:
+(GREEN ORANGE BLUE).
+
+ #<PACKAGE COMMON-LISP-USER> is the package named COMMON-LISP-USER. It has 2
+ nicknames CL-USER, USER.
+ It imports the external symbols of 2 packages COMMON-LISP, EXT and exports
+ no symbols, but no package uses these exports.
+
+ (GREEN ORANGE BLUE) is a list of length 3.
+
+[32]> (describe colors)
+
+(GREEN ORANGE BLUE) is a list of length 3.
+
+[33]> (type-of 'colors)
+SYMBOL
+[34]> (type-of colors)
+CONS
+[35]> (car (list colors (car colors)))
+(GREEN ORANGE BLUE)
+[36]> (cdr (append colors colors))
+(ORANGE BLUE GREEN ORANGE BLUE)
+[37]> (cons 'colors colors)
+(COLORS GREEN ORANGE BLUE)
+[38]> (list (append colors (car colors)) (cdr colors))
+((GREEN ORANGE BLUE . GREEN) (ORANGE BLUE))
+[39]> (append (cddr colors) (cddr colors))
+(BLUE BLUE)
+[40]> (cdddar (list (append colors (cdr colors) (cddr colors)) colors ))
+(ORANGE BLUE BLUE)
+[41]>

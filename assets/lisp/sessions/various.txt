@@ -1,0 +1,128 @@
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "lp.lsp")
+;; Loading file lp.lsp ...
+;; Loaded file lp.lsp
+T
+[3]> (singletonp '(hello))
+T
+[4]> (singletonp '(Mark Willson))
+NIL
+[5]> (singletonp '(Acidic palate Vegetal cappuccino A cabernet franc?))
+NIL
+[6]> (trace rac)
+;; Tracing function RAC.
+(RAC)
+[7]> (rac '(blah))
+1. Trace: (RAC '(BLAH))
+1. Trace: RAC ==> BLAH
+BLAH
+[8]> (rac '(The real Slim Shady))
+1. Trace: (RAC '(THE REAL SLIM SHADY))
+2. Trace: (RAC '(REAL SLIM SHADY))
+3. Trace: (RAC '(SLIM SHADY))
+4. Trace: (RAC '(SHADY))
+4. Trace: RAC ==> SHADY
+3. Trace: RAC ==> SHADY
+2. Trace: RAC ==> SHADY
+1. Trace: RAC ==> SHADY
+SHADY
+[9]> (trace rdc)
+;; Tracing function RDC.
+(RDC)
+[10]> (rdc '(If you  had unlimited resources...))
+1. Trace: (RDC '(IF YOU HAD UNLIMITED RESOURCES...))
+2. Trace: (RDC '(YOU HAD UNLIMITED RESOURCES...))
+3. Trace: (RDC '(HAD UNLIMITED RESOURCES...))
+4. Trace: (RDC '(UNLIMITED RESOURCES...))
+5. Trace: (RDC '(RESOURCES...))
+5. Trace: RDC ==> NIL
+4. Trace: RDC ==> (UNLIMITED)
+3. Trace: RDC ==> (HAD UNLIMITED)
+2. Trace: RDC ==> (YOU HAD UNLIMITED)
+1. Trace: RDC ==> (IF YOU HAD UNLIMITED)
+(IF YOU HAD UNLIMITED)
+[11]> (untrace rac rdc)
+(RAC RDC)
+[12]> (trace snoc)
+;; Tracing function SNOC.
+(SNOC)
+[13]> (snoc 'blue ())
+1. Trace: (SNOC 'BLUE 'NIL)
+1. Trace: SNOC ==> (BLUE)
+(BLUE)
+[14]> (snoc 'blue '(red))
+1. Trace: (SNOC 'BLUE '(RED))
+2. Trace: (SNOC 'BLUE 'NIL)
+2. Trace: SNOC ==> (BLUE)
+1. Trace: SNOC ==> (RED BLUE)
+(RED BLUE)
+[15]> (snoc 'blue '(teal navy sky aqua))
+1. Trace: (SNOC 'BLUE '(TEAL NAVY SKY AQUA))
+2. Trace: (SNOC 'BLUE '(NAVY SKY AQUA))
+3. Trace: (SNOC 'BLUE '(SKY AQUA))
+4. Trace: (SNOC 'BLUE '(AQUA))
+5. Trace: (SNOC 'BLUE 'NIL)
+5. Trace: SNOC ==> (BLUE)
+4. Trace: SNOC ==> (AQUA BLUE)
+3. Trace: SNOC ==> (SKY AQUA BLUE)
+2. Trace: SNOC ==> (NAVY SKY AQUA BLUE)
+1. Trace: SNOC ==> (TEAL NAVY SKY AQUA BLUE)
+(TEAL NAVY SKY AQUA BLUE)
+[16]> (untrace snoc)
+(SNOC)
+[17]> (trace palindromep)
+;; Tracing function PALINDROMEP.
+(PALINDROMEP)
+[18]> (palindromep ())
+1. Trace: (PALINDROMEP 'NIL)
+1. Trace: PALINDROMEP ==> T
+T
+[19]> (palindromep '(palindrome))
+1. Trace: (PALINDROMEP '(PALINDROME))
+1. Trace: PALINDROMEP ==> T
+T
+[20]> (palindromep '(clos sloc))
+1. Trace: (PALINDROMEP '(CLOS SLOC))
+1. Trace: PALINDROMEP ==> NIL
+NIL
+[21]> (palindromep '(food drink food))
+1. Trace: (PALINDROMEP '(FOOD DRINK FOOD))
+2. Trace: (PALINDROMEP '(DRINK))
+2. Trace: PALINDROMEP ==> T
+1. Trace: PALINDROMEP ==> T
+T
+[22]> (palindromep '(1 2 3 4 5 4 2 3 1))
+1. Trace: (PALINDROMEP '(1 2 3 4 5 4 2 3 1))
+2. Trace: (PALINDROMEP '(2 3 4 5 4 2 3))
+2. Trace: PALINDROMEP ==> NIL
+1. Trace: PALINDROMEP ==> NIL
+NIL
+[23]> (palindromep '(hey hey my my my my hey hey))
+1. Trace: (PALINDROMEP '(HEY HEY MY MY MY MY HEY HEY))
+2. Trace: (PALINDROMEP '(HEY MY MY MY MY HEY))
+3. Trace: (PALINDROMEP '(MY MY MY MY))
+4. Trace: (PALINDROMEP '(MY MY))
+5. Trace: (PALINDROMEP 'NIL)
+5. Trace: PALINDROMEP ==> T
+4. Trace: PALINDROMEP ==> T
+3. Trace: PALINDROMEP ==> T
+2. Trace: PALINDROMEP ==> T
+1. Trace: PALINDROMEP ==> T
+T

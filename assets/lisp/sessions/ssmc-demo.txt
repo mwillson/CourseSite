@@ -1,0 +1,300 @@
+Missionaries= (M M M) Cannibals= (C) Boat= B
+N16 N14 MOVE-MC-RL
+Missionaries= (M M) Cannibals= (C C) Boat= B
+Missionaries= (M) Cannibals= (C) Boat= NIL
+N14 N11 MOVE-MM-LR
+Missionaries= (M) Cannibals= (C) Boat= NIL
+Missionaries= (M M) Cannibals= (C C) Boat= B
+N11 N10 MOVE-C-RL
+Missionaries= (M M M) Cannibals= (C) Boat= B
+Missionaries= NIL Cannibals= (C C) Boat= NIL
+N10 N4 MOVE-CC-LR
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+N4 N3 MOVE-C-RL
+Missionaries= (M M M) Cannibals= (C C) Boat= B
+Missionaries= NIL Cannibals= (C) Boat= NIL
+N1 ROOT MOVE-C-LR
+Missionaries= (M M M) Cannibals= (C C) Boat= NIL
+Missionaries= NIL Cannibals= (C) Boat= B
+N2 ROOT MOVE-MC-LR
+Missionaries= (M M) Cannibals= (C C) Boat= NIL
+Missionaries= (M) Cannibals= (C) Boat= B
+N3 ROOT MOVE-CC-LR
+Missionaries= (M M M) Cannibals= (C) Boat= NIL
+Missionaries= NIL Cannibals= (C C) Boat= B
+ROOT
+Missionaries= (M M M) Cannibals= (C C C) Boat= B
+Missionaries= NIL Cannibals= NIL Boat= NIL
+
+UNEXPLORED
+
+N21 N19 MOVE-C-LR
+Missionaries= NIL Cannibals= (C C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C) Boat= B
+N25 N22 MOVE-CC-RL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+N24 N22 MOVE-C-RL
+Missionaries= NIL Cannibals= (C C) Boat= B
+Missionaries= (M M M) Cannibals= (C) Boat= NIL
+N23 N22 MOVE-M-RL
+Missionaries= (M) Cannibals= (C) Boat= B
+Missionaries= (M M) Cannibals= (C C) Boat= NIL
+E-NODE
+
+N21 N19 MOVE-C-LR
+Missionaries= NIL Cannibals= (C C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C) Boat= B
+
+>>> Solve
+
+EXPLORED
+
+N22 N19 MOVE-CC-LR
+Missionaries= NIL Cannibals= (C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C C) Boat= B
+N19 N17 MOVE-C-RL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+N17 N16 MOVE-MM-LR
+Missionaries= NIL Cannibals= (C C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C) Boat= B
+N16 N14 MOVE-MC-RL
+Missionaries= (M M) Cannibals= (C C) Boat= B
+Missionaries= (M) Cannibals= (C) Boat= NIL
+N14 N11 MOVE-MM-LR
+Missionaries= (M) Cannibals= (C) Boat= NIL
+Missionaries= (M M) Cannibals= (C C) Boat= B
+N11 N10 MOVE-C-RL
+Missionaries= (M M M) Cannibals= (C) Boat= B
+Missionaries= NIL Cannibals= (C C) Boat= NIL
+N10 N4 MOVE-CC-LR
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+N4 N3 MOVE-C-RL
+Missionaries= (M M M) Cannibals= (C C) Boat= B
+Missionaries= NIL Cannibals= (C) Boat= NIL
+N1 ROOT MOVE-C-LR
+Missionaries= (M M M) Cannibals= (C C) Boat= NIL
+Missionaries= NIL Cannibals= (C) Boat= B
+N2 ROOT MOVE-MC-LR
+Missionaries= (M M) Cannibals= (C C) Boat= NIL
+Missionaries= (M) Cannibals= (C) Boat= B
+N3 ROOT MOVE-CC-LR
+Missionaries= (M M M) Cannibals= (C) Boat= NIL
+Missionaries= NIL Cannibals= (C C) Boat= B
+ROOT
+Missionaries= (M M M) Cannibals= (C C C) Boat= B
+Missionaries= NIL Cannibals= NIL Boat= NIL
+
+UNEXPLORED
+
+N25 N22 MOVE-CC-RL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+N24 N22 MOVE-C-RL
+Missionaries= NIL Cannibals= (C C) Boat= B
+Missionaries= (M M M) Cannibals= (C) Boat= NIL
+N23 N22 MOVE-M-RL
+Missionaries= (M) Cannibals= (C) Boat= B
+Missionaries= (M M) Cannibals= (C C) Boat= NIL
+E-NODE
+
+N25 N22 MOVE-CC-RL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+
+>>> Solve
+
+EXPLORED
+
+N22 N19 MOVE-CC-LR
+Missionaries= NIL Cannibals= (C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C C) Boat= B
+N19 N17 MOVE-C-RL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+N17 N16 MOVE-MM-LR
+Missionaries= NIL Cannibals= (C C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C) Boat= B
+N16 N14 MOVE-MC-RL
+Missionaries= (M M) Cannibals= (C C) Boat= B
+Missionaries= (M) Cannibals= (C) Boat= NIL
+N14 N11 MOVE-MM-LR
+Missionaries= (M) Cannibals= (C) Boat= NIL
+Missionaries= (M M) Cannibals= (C C) Boat= B
+N11 N10 MOVE-C-RL
+Missionaries= (M M M) Cannibals= (C) Boat= B
+Missionaries= NIL Cannibals= (C C) Boat= NIL
+N10 N4 MOVE-CC-LR
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+N4 N3 MOVE-C-RL
+Missionaries= (M M M) Cannibals= (C C) Boat= B
+Missionaries= NIL Cannibals= (C) Boat= NIL
+N1 ROOT MOVE-C-LR
+Missionaries= (M M M) Cannibals= (C C) Boat= NIL
+Missionaries= NIL Cannibals= (C) Boat= B
+N2 ROOT MOVE-MC-LR
+Missionaries= (M M) Cannibals= (C C) Boat= NIL
+Missionaries= (M) Cannibals= (C) Boat= B
+N3 ROOT MOVE-CC-LR
+Missionaries= (M M M) Cannibals= (C) Boat= NIL
+Missionaries= NIL Cannibals= (C C) Boat= B
+ROOT
+Missionaries= (M M M) Cannibals= (C C C) Boat= B
+Missionaries= NIL Cannibals= NIL Boat= NIL
+
+UNEXPLORED
+
+N24 N22 MOVE-C-RL
+Missionaries= NIL Cannibals= (C C) Boat= B
+Missionaries= (M M M) Cannibals= (C) Boat= NIL
+N23 N22 MOVE-M-RL
+Missionaries= (M) Cannibals= (C) Boat= B
+Missionaries= (M M) Cannibals= (C C) Boat= NIL
+E-NODE
+
+N24 N22 MOVE-C-RL
+Missionaries= NIL Cannibals= (C C) Boat= B
+Missionaries= (M M M) Cannibals= (C) Boat= NIL
+
+>>> Solve
+
+EXPLORED
+
+N24 N22 MOVE-C-RL
+Missionaries= NIL Cannibals= (C C) Boat= B
+Missionaries= (M M M) Cannibals= (C) Boat= NIL
+N22 N19 MOVE-CC-LR
+Missionaries= NIL Cannibals= (C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C C) Boat= B
+N19 N17 MOVE-C-RL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+N17 N16 MOVE-MM-LR
+Missionaries= NIL Cannibals= (C C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C) Boat= B
+N16 N14 MOVE-MC-RL
+Missionaries= (M M) Cannibals= (C C) Boat= B
+Missionaries= (M) Cannibals= (C) Boat= NIL
+N14 N11 MOVE-MM-LR
+Missionaries= (M) Cannibals= (C) Boat= NIL
+Missionaries= (M M) Cannibals= (C C) Boat= B
+N11 N10 MOVE-C-RL
+Missionaries= (M M M) Cannibals= (C) Boat= B
+Missionaries= NIL Cannibals= (C C) Boat= NIL
+N10 N4 MOVE-CC-LR
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+N4 N3 MOVE-C-RL
+Missionaries= (M M M) Cannibals= (C C) Boat= B
+Missionaries= NIL Cannibals= (C) Boat= NIL
+N1 ROOT MOVE-C-LR
+Missionaries= (M M M) Cannibals= (C C) Boat= NIL
+Missionaries= NIL Cannibals= (C) Boat= B
+N2 ROOT MOVE-MC-LR
+Missionaries= (M M) Cannibals= (C C) Boat= NIL
+Missionaries= (M) Cannibals= (C) Boat= B
+N3 ROOT MOVE-CC-LR
+Missionaries= (M M M) Cannibals= (C) Boat= NIL
+Missionaries= NIL Cannibals= (C C) Boat= B
+ROOT
+Missionaries= (M M M) Cannibals= (C C C) Boat= B
+Missionaries= NIL Cannibals= NIL Boat= NIL
+
+UNEXPLORED
+
+N23 N22 MOVE-M-RL
+Missionaries= (M) Cannibals= (C) Boat= B
+Missionaries= (M M) Cannibals= (C C) Boat= NIL
+N27 N24 MOVE-CC-LR
+Missionaries= NIL Cannibals= NIL Boat= NIL
+Missionaries= (M M M) Cannibals= (C C C) Boat= B
+N26 N24 MOVE-C-LR
+Missionaries= NIL Cannibals= (C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C C) Boat= B
+E-NODE
+
+N23 N22 MOVE-M-RL
+Missionaries= (M) Cannibals= (C) Boat= B
+Missionaries= (M M) Cannibals= (C C) Boat= NIL
+
+>>> Solve
+
+EXPLORED
+
+N23 N22 MOVE-M-RL
+Missionaries= (M) Cannibals= (C) Boat= B
+Missionaries= (M M) Cannibals= (C C) Boat= NIL
+N24 N22 MOVE-C-RL
+Missionaries= NIL Cannibals= (C C) Boat= B
+Missionaries= (M M M) Cannibals= (C) Boat= NIL
+N22 N19 MOVE-CC-LR
+Missionaries= NIL Cannibals= (C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C C) Boat= B
+N19 N17 MOVE-C-RL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+N17 N16 MOVE-MM-LR
+Missionaries= NIL Cannibals= (C C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C) Boat= B
+N16 N14 MOVE-MC-RL
+Missionaries= (M M) Cannibals= (C C) Boat= B
+Missionaries= (M) Cannibals= (C) Boat= NIL
+N14 N11 MOVE-MM-LR
+Missionaries= (M) Cannibals= (C) Boat= NIL
+Missionaries= (M M) Cannibals= (C C) Boat= B
+N11 N10 MOVE-C-RL
+Missionaries= (M M M) Cannibals= (C) Boat= B
+Missionaries= NIL Cannibals= (C C) Boat= NIL
+N10 N4 MOVE-CC-LR
+Missionaries= (M M M) Cannibals= NIL Boat= NIL
+Missionaries= NIL Cannibals= (C C C) Boat= B
+N4 N3 MOVE-C-RL
+Missionaries= (M M M) Cannibals= (C C) Boat= B
+Missionaries= NIL Cannibals= (C) Boat= NIL
+N1 ROOT MOVE-C-LR
+Missionaries= (M M M) Cannibals= (C C) Boat= NIL
+Missionaries= NIL Cannibals= (C) Boat= B
+N2 ROOT MOVE-MC-LR
+Missionaries= (M M) Cannibals= (C C) Boat= NIL
+Missionaries= (M) Cannibals= (C) Boat= B
+N3 ROOT MOVE-CC-LR
+Missionaries= (M M M) Cannibals= (C) Boat= NIL
+Missionaries= NIL Cannibals= (C C) Boat= B
+ROOT
+Missionaries= (M M M) Cannibals= (C C C) Boat= B
+Missionaries= NIL Cannibals= NIL Boat= NIL
+
+UNEXPLORED
+
+N27 N24 MOVE-CC-LR
+Missionaries= NIL Cannibals= NIL Boat= NIL
+Missionaries= (M M M) Cannibals= (C C C) Boat= B
+N26 N24 MOVE-C-LR
+Missionaries= NIL Cannibals= (C) Boat= NIL
+Missionaries= (M M M) Cannibals= (C C) Boat= B
+N28 N23 MOVE-MC-LR
+Missionaries= NIL Cannibals= NIL Boat= NIL
+Missionaries= (M M M) Cannibals= (C C C) Boat= B
+E-NODE
+
+N27 N24 MOVE-CC-LR
+Missionaries= NIL Cannibals= NIL Boat= NIL
+Missionaries= (M M M) Cannibals= (C C C) Boat= B
+
+Move two cannibals to the right bank.
+Move a cannibal to the left bank.
+Move two cannibals to the right bank.
+Move a cannibal to the left bank.
+Move 2 missionaries to the right bank.
+Move a missionary and cannibal to the left bank.
+Move 2 missionaries to the right bank.
+Move a cannibal to the left bank.
+Move two cannibals to the right bank.
+Move a cannibal to the left bank.
+Move two cannibals to the right bank.
+NIL
+[40]>

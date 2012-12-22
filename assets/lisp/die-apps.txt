@@ -1,0 +1,73 @@
+; die-apps.lsp
+;
+; Mark Willson
+; 10-14-12
+;
+; die-apps - code that utilizes the die and accumulator CLOS classes to solve some problems
+
+; roll-for-pair - rolls two dice until a pair of matching faces is found.
+
+(load "die.lsp")
+(load "accumulator.lsp")
+
+(defmethod roll-for-pair ((d1 die) (d2 die) (a accumulator) &aux r1 r2)
+  (roll d1)
+  (roll d2)
+  (setf r1 (die-top d1))
+  (setf r2 (die-top d2))
+  (inc a 1)
+  (cond
+    ((= r1 r2)
+	  (display d1)
+	  (display d2)
+	)
+	(t
+	  (display d1)
+	  (display d2)
+	  (roll-for-pair d1 d2 a)
+	)
+  )
+)
+
+; roll-for-sum - rolls two dice until the top faces add up to a given integer
+; assuming the integer is not greater than the sum of the max dice values
+
+(defmethod roll-for-sum ((d1 die) (d2 die) (sum integer) (a accumulator) &aux r1 r2)
+  (roll d1)
+  (roll d2)
+  (setf r1 (die-top d1))
+  (setf r2 (die-top d2))
+  (inc a 1)
+  (cond
+    ((> sum (+ (die-faces d1) (die-faces d2)))
+	  nil
+	)
+    ((= sum (+ r1 r2))
+	  (display d1)
+	  (display d2)
+	)
+	(t
+	  (display d1)
+	  (display d2)
+	  (roll-for-sum d1 d2 sum a)
+	)
+  )
+)
+
+(defmethod expectation ((n1 integer) (n2 integer) (func symbol) &aux d1 d2 a)
+  (setf d1 (make-instance 'die :faces n1))
+  (setf d2 (make-instance 'die :faces n2))
+  (setf a (make-instance 'accumulator))
+  (cond
+    ((equal func 'roll-for-sum)
+	  (princ "Sum? ")
+	  (setf sum (read))
+	  (funcall func d1 d2 sum a)
+	  (format t "Number of tries: ~A~%" (accumulator-value a))
+	)
+	((equal func 'roll-for-pair)
+	  (funcall func d1 d2 a)
+	  (format t "Number of tries: ~A~%" (accumulator-value a))
+	)
+  )
+)

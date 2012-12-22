@@ -1,0 +1,30 @@
+; sls.lsp
+; A program for sorting a list of three numbers.
+;
+; Mark Willson
+; 9-10-12
+
+; sls - function for sorting the list
+
+(defun sls (numlist)
+  (cond 
+    ((< (first numlist) (second numlist) (third numlist))
+      numlist
+    )
+    ((< (second numlist) (first numlist) (third numlist))
+      (list (second numlist) (first numlist) (third numlist))
+    )
+	((< (third numlist) (first numlist) (second numlist))
+      (list (third numlist) (first numlist) (second numlist))
+    )
+	((< (first numlist) (third numlist) (second numlist))
+      (list (first numlist) (third numlist) (second numlist))
+    )
+	((< (second numlist) (third numlist) (first numlist))
+      (list (second numlist) (third numlist) (first numlist))
+    )
+	((< (third numlist) (second numlist) (first numlist))
+      (list (third numlist) (second numlist) (first numlist))
+    )
+  )
+)

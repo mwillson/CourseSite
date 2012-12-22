@@ -65,10 +65,13 @@ border-radius: 5px;
 
 .span3 {
 border-color: #eeeeee;
+position: fixed;
 }
 
 .row-fluid>.span9 {
 width:73%;
+left: 24%;
+position: relative;
 }
 
 .hero-unit, .well, p {

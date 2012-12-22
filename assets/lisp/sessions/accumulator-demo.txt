@@ -1,0 +1,65 @@
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "accumulator.lsp")
+;; Loading file accumulator.lsp ...
+;; Loaded file accumulator.lsp
+T
+[2]> (setf a1 (make-instance 'accumulator))
+#<ACCUMULATOR #x19F39A05>
+[3]> (inc a1  (random 10))
+6
+[4]> (inc a1  (random 10))
+10
+[5]> (inc a1  (random 10))
+10
+[6]> (inc a1  (random 10))
+17
+[7]> (inc a1  (random 10))
+21
+[8]> (inc a1  (random 10))
+27
+[9]> (inc a1  (random 10))
+32
+[10]> (reset a1)
+0
+[11]> (inc a1  (random 10))
+6
+[12]> (inc a1  (random 10))
+11
+[13]> (inc a1  (random 10))
+16
+[14]> (inc a1  (random 10))
+24
+[15]> (inc a1  (random 10))
+27
+[16]> (inc a1  (random 10))
+35
+[17]> (inc a1  (random 10))
+36
+[18]> (inc a1  (random 10))
+40
+[19]> (reset a1)
+0
+[20]> (reset a1)
+0
+[21]> (inc a1  (random 10))
+4
+[22]> (reset a1)
+0
+[23]>

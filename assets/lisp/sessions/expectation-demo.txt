@@ -1,0 +1,132 @@
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "die-apps.lsp")
+;; Loading file die-apps.lsp ...
+;;  Loading file die.lsp ...
+;;  Loaded file die.lsp
+;;  Loading file accumulator.lsp ...
+;;  Loaded file accumulator.lsp
+;; Loaded file die-apps.lsp
+T
+[2]> (expectation 6 6 'roll-for-pair)
+Faces: 6 History: (4)
+Faces: 6 History: (4)
+Number of tries: 1
+NIL
+[3]> (expectation 3 12 'roll-for-pair)
+Faces: 3 History: (1)
+Faces: 12 History: (4)
+Faces: 3 History: (1 2)
+Faces: 12 History: (4 4)
+Faces: 3 History: (1 2 0)
+Faces: 12 History: (4 4 6)
+Faces: 3 History: (1 2 0 2)
+Faces: 12 History: (4 4 6 5)
+Faces: 3 History: (1 2 0 2 2)
+Faces: 12 History: (4 4 6 5 1)
+Faces: 3 History: (1 2 0 2 2 0)
+Faces: 12 History: (4 4 6 5 1 0)
+Number of tries: 6
+NIL
+[4]> (expectation 6 6 'roll-for-sum)
+Sum? 7
+Faces: 6 History: (3)
+Faces: 6 History: (5)
+Faces: 6 History: (3 4)
+Faces: 6 History: (5 3)
+Number of tries: 2
+NIL
+[5]> (expectation 3 12 'roll-for-sum)
+Sum? 7
+Faces: 3 History: (2)
+Faces: 12 History: (1)
+Faces: 3 History: (2 1)
+Faces: 12 History: (1 8)
+Faces: 3 History: (2 1 2)
+Faces: 12 History: (1 8 6)
+Faces: 3 History: (2 1 2 2)
+Faces: 12 History: (1 8 6 5)
+Number of tries: 4
+NIL
+[6]> (expectation 6 6 'roll-for-sum)
+Sum? 11
+Faces: 6 History: (5)
+Faces: 6 History: (5)
+Faces: 6 History: (5 5)
+Faces: 6 History: (5 5)
+Faces: 6 History: (5 5 3)
+Faces: 6 History: (5 5 5)
+Faces: 6 History: (5 5 3 1)
+Faces: 6 History: (5 5 5 1)
+Faces: 6 History: (5 5 3 1 3)
+Faces: 6 History: (5 5 5 1 6)
+Faces: 6 History: (5 5 3 1 3 6)
+Faces: 6 History: (5 5 5 1 6 2)
+Faces: 6 History: (5 5 3 1 3 6 1)
+Faces: 6 History: (5 5 5 1 6 2 1)
+Faces: 6 History: (5 5 3 1 3 6 1 4)
+Faces: 6 History: (5 5 5 1 6 2 1 6)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6 2)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2 3)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6 2 3)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2 3 1)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6 2 3 3)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2 3 1 6)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6 2 3 3 3)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2 3 1 6 3)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6 2 3 3 3 1)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2 3 1 6 3 3)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6 2 3 3 3 1 6)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2 3 1 6 3 3 2)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6 2 3 3 3 1 6 3)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2 3 1 6 3 3 2 4)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6 2 3 3 3 1 6 3 4)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2 3 1 6 3 3 2 4 5)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6 2 3 3 3 1 6 3 4 5)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2 3 1 6 3 3 2 4 5 2)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6 2 3 3 3 1 6 3 4 5 5)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2 3 1 6 3 3 2 4 5 2 2)
+Faces: 6 History: (5 5 3 1 3 6 1 4 5 6 2 3 3 3 1 6 3 4 5 5 6)
+Faces: 6 History: (5 5 5 1 6 2 1 6 4 2 3 1 6 3 3 2 4 5 2 2 5)
+Number of tries: 21
+NIL
+[7]> (expectation 3 12 'roll-for-sum)
+Sum? 11
+Faces: 3 History: (3)
+Faces: 12 History: (6)
+Faces: 3 History: (3 1)
+Faces: 12 History: (6 11)
+Faces: 3 History: (3 1 2)
+Faces: 12 History: (6 11 10)
+Faces: 3 History: (3 1 2 1)
+Faces: 12 History: (6 11 10 6)
+Faces: 3 History: (3 1 2 1 3)
+Faces: 12 History: (6 11 10 6 5)
+Faces: 3 History: (3 1 2 1 3 1)
+Faces: 12 History: (6 11 10 6 5 5)
+Faces: 3 History: (3 1 2 1 3 1 3)
+Faces: 12 History: (6 11 10 6 5 5 4)
+Faces: 3 History: (3 1 2 1 3 1 3 3)
+Faces: 12 History: (6 11 10 6 5 5 4 8)
+Number of tries: 8
+NIL

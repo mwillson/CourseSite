@@ -1,0 +1,229 @@
+; lp.lsp
+; A program with a lot of list processing functionality.
+;
+; Mark Willson
+; 9-20-12
+
+; pick - function for picking a random element from a list
+
+(defun pick (lst)
+  (nth (random (length lst)) lst)
+)
+
+; singletonp - a predicate for determining whether a list contains a single item
+
+(defun singletonp (lst)
+  (cond
+    ;empty
+    ((null lst)
+	  nil
+	)
+	;singleton
+	((null (cdr lst))
+	  t
+	)
+	;everything else
+	(t
+	  nil
+	)
+  )
+)
+
+; rac - returns the last element of a list
+
+(defun rac (lst)
+  (cond
+    ((singletonp lst)
+	  (car lst)
+	)
+	(t
+	  (rac (cdr lst))
+	)
+  )
+)
+
+; rdc - return everything but the last element of a list
+
+(defun rdc (lst)
+  (cond
+    ((singletonp lst)
+	  ()
+	)
+	(t
+	  (cons (car lst) (rdc (cdr lst)))
+	)
+  )
+)
+
+; snoc - appends an element to the end of a list
+
+(defun snoc (x lst)
+  (cond
+    ((null lst)
+	  (list x)
+	)
+	(t
+	  (cons (car lst) (snoc x (cdr lst)))
+	)
+  )
+)
+
+; palindromep - tests whether a list reads the same forwards and backwards
+
+(defun palindromep (lst)
+  (cond
+    ((null lst)
+	  t
+	)
+	((singletonp lst)
+	  t
+	)
+	((equal (car lst) (rac lst))
+	  (palindromep (cdr (rdc lst)))
+	)
+	(t
+	  nil
+	)
+  )
+)
+
+; sum - adds together the elements of a list
+
+(defun sum (lst)
+  (cond
+    ((null lst)
+	  0
+	)
+	(t
+	  (+ (car lst) (sum (cdr lst)))
+	)
+  )
+)
+
+; product - multiplies the elements of a list together
+
+(defun product (lst)
+  (cond
+    ((null lst)
+	  1
+	)
+	(t
+	  (* (car lst) (product (cdr lst)))
+	)
+  )
+)
+
+; iota - starting with 1, creates a list of numbers counting up to a given number
+
+(defun iota (n)
+  (cond
+    ((eq n 0)
+	  ()
+	)
+	(t
+	  (snoc n (iota (- n 1)))
+	)
+  )
+)
+
+; generate - generates a list containing n instances of lo
+
+(defun generate (n lo)
+  (cond
+    ((eq n 0)
+	  ()
+	)
+	(t
+	  (cons lo (generate (- n 1) lo))
+	)
+  )
+)
+
+; factorial - evaluates the factorial of a number
+
+(defun factorial (n)
+  (let (lst)
+    (setf lst (iota n))
+	(product lst)
+  )
+)
+
+; power - evaluates x to the power of y
+
+(defun power (x y)
+  (let (lst)
+    (setf lst (generate y x))
+	(product lst)
+  )
+)
+
+; filter-in - returns a list of elements that are true to a given predicate
+
+(defun filter-in (fn lst)
+  (cond
+    ((null lst)
+	  ()
+	)
+	((funcall fn (car lst))
+	  (cons (car lst) (filter-in fn (cdr lst)))
+	)
+	(t
+	  (filter-in fn (cdr lst))
+	)
+  )
+)
+
+; filter-out - returns a list of elements which are false to a given predicate
+
+(defun filter-out (fn lst)
+  (cond
+    ((null lst)
+	  ()
+	)
+	((not (funcall fn (car lst)))
+	  (cons (car lst) (filter-out fn (cdr lst)))
+	)
+	(t
+	  (filter-out fn (cdr lst))
+	)
+  )
+)
+
+; take-from - removes all occurences of a given element from a list
+
+(defun take-from (elt lst)
+  (filter-out
+    (lambda (y) (equal elt y))
+	lst
+  )
+)
+
+; random-permutation - takes a list and returns a random permutation of the list
+
+(defun random-permutation (lst)
+  (cond
+    ((null lst)
+	  ()
+	)
+	(t
+	  (let (elt remainder)
+	    (setf elt (pick lst))
+		(setf remainder (remove-one elt lst))
+        (cons elt (random-permutation remainder))		
+	  )
+	)
+  )
+)
+
+; remove-one - remove one instance of an element from a given list
+
+(defun remove-one (elt lst)
+    (cond
+	  ((not (equal elt (car lst)))
+	    (cons (car lst) (remove-one elt (cdr lst)))
+	  )
+	  ((equal elt (car lst))
+	    (cdr lst)
+	  )
+    )
+)

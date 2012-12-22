@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Mark Willson | Code Foo Application</title>
+    <title>Mark Willson | Cognitive Science @ SUNY Oswego</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -16,7 +16,6 @@
     <![endif]-->
 
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="assets/img/ign_logo.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
@@ -38,9 +37,10 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"><a href="#home">Home</a></li><li><a>|</a></li>
-			  <li><a href="#bus">Ping Pong Ball Bus</a></li><li><a>|</a></li>
-  			  <li><a href="#layout">Fluid Layout</a></li><li><a>|</a></li>
-              <li><a href="#lplate">License Plates</a></li>
+			  <li><a href="http://www.gigamonkeys.com/book/">Practical Common Lisp</a></li><li><a>|</a></li>
+  			  <li><a href="http://www.cs.oswego.edu/~blue">Course Site</a></li><li><a>|</a></li>
+              <li><a href="http://www.scribd.com/doc/63071390/Introduction-to-Artificial-Intelligence-Wolfgang-Ertel">Intro to AI</a></li><li><a>|</a></li>
+			  <li><a href="http://www.scribd.com/doc/51875893/Land-of-Lisp">Land of Lisp</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -51,145 +51,148 @@
 	
     <div class="container-fluid" id="home">
 	
-	  <!-- Row 0 - About and Video -->
-      <div class="row-fluid ign">
-		<div class="span5">
-		  <img src="assets/img/code_foo_ign.png" width="50%" height="50%" alt="">
-		</div>
-      </div><!--/row0-->
-	
 	  <!-- Row 1 - About and Video -->
       <div class="row-fluid">
 		<div class="span3">
           <div class="well sidebar-nav">
-		    <h3>About Me</h3>
-            <p>Hello, IGN! My name is Mark Willson. I am a Cognitive Science major at the State University of New York at Oswego. My main interests are Computer Science and Philosophy. I love thinking about thinking, and I am very interested in social media. I also love thinking about movies, music and video games! Oh, and I have a sweet beard sometimes too. ;)</p>
+		    <h4>About Me</h4>
+            <p>Hello! My name is Mark Willson. I am a Cognitive Science major at the State University of New York at Oswego. My main interests are Computer Science and Philosophy. I love thinking about thinking, and I am very interested in social media. I also love thinking about art, including movies, music and video games!</p>
           </div><!--/.well -->
         </div><!--/span3-->
 		
         <div class="span9">
           <div class="hero-unit">
-		   <iframe width="560" height="315" src="http://www.youtube.com/embed/u8tbX60N_SU" frameborder="0" allowfullscreen></iframe>
-          </div>
-		  <div id="bus"></div>
-        </div><!--/span9-->
-      </div><!--/row1-->
 
-	  <!-- Row 2 - Bus Problem -->
-      <div class="row-fluid">
-		<div class="span3">
-          <div class="well sidebar-nav">
-		  <h4><img src="assets/img/ball1.png" alt="?" /> How many ping pong balls would it take to fill an average-sized school bus? Describe each step in your thought process. </h4>
-	      </div><!--/.well -->
-        </div><!--/span3-->
-		
-        <div class="span9">
-          <div class="hero-unit">
-            
-			<div id="myCarousel" class="carousel slide">
-            <div class="carousel-inner">
-              <div class="item active">
-                <img src="assets/img/pong_ball_measured.png" class="carimg" alt="">
-				<img src="assets/img/school_bus.jpeg" class="carimg" alt="">
-                <div class="carousel-caption">
-				  <h4>1. Measurements</h4>
-                  <h4>First we need to know how big a ping pong ball and a school bus are.</h4>
-                </div>
-              </div>
-              <div class="item">
-                <img src="assets/img/5_pong_balls.png" class="carimg" alt="">
-                <div class="carousel-caption">
-				  <h4>2. Arrangement</h4>
-                  <h4>Next, we need to determine how the ping pong balls will be arranged to fit to maximize volume. What happens to work out well is a cube of three layers consisting of 5 balls, 4 balls, and 5 balls respectively. Each side looks like this.</h4>
-                </div>
-              </div>
-			  <div class="item">
-                <img src="assets/img/5_balls_measured.png" class="carimg" alt="">
-                <div class="carousel-caption">
-				  <h4>3. Trigonometry</h4>
-                  <h4>With a little bit of math, we can determine the length of a side of this cube.</h4>
-                </div>
-              </div>
-              <div class="item">
-                <img src="assets/img/school_bus_measured.png" class="carimg" alt="">
-                <div class="carousel-caption">
-				  <h4>4. Divy up the Space</h4>
-                  <h4>Now we imagine a school bus as a rectangular prism, and for convenience two of its dimensions are roughly 1 meter. </h4>
-                </div>
-              </div>
-			  <div class="item">
-                <img src="assets/img/measurements.png" class="carimg" alt="">
-                <div class="carousel-caption">
-				  <h4>5. Calculate our Cubes</h4>
-                  <h4>If we take our two same-sized dimensions of the prism to be made up of 12 cubes each, we can divide the volume by those two lengths, and determine how long the other side should be, which in our case is 68.6 meters. Dividing this by the length of a cube, we can now find the number of cubes that can fit along our third side.</h4>
-                </div>
-              </div>
-			  <div class="item">
-                <img src="assets/img/tally.png" class="carimg" alt="">
-                <div class="carousel-caption">
-				  <h4>6. Tally up the Numbers</h4>
-                  <h4>Now that we know how many of our packed cubes can fit into our prism, we can do some quick calculations to figure out the number of balls!</h4>
-                </div>
-              </div>
-			  <div class="item">
-                <img src="assets/img/4_balls.png" class="carimg" alt="">
-                <div class="carousel-caption">
-				  <h4>7. Precision/Accuracy</h4>
-                  <h4>If my calculations are precise, there is a bit of room leftover at the end: just enough to fit one 12 by 12 row of 4-ball groups. This would add 576(144*4) balls to our total bringing it to 1,629,504!</h4>
-                </div>
-              </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-          </div>
+			<div class="well">
+			12/7/2012
+			<h5>Programming Challenge #10 - "The Quarto Playing Framework, Part II"</h5>
+			<a href="assets/lisp/h-h-quarto.txt">quarto.lsp</a><br />
+			<a href="assets/lisp/h-h-qtests.txt">qtests.lsp</a><br />
+			<a href="assets/lisp/sessions/quarto-playing-pt2-demo.txt">quarto-objects-demo.txt</a>
+			</div>
+
+		    <div><br /></div>	  
+		  
+		    <div class="well">
+			12/7/2012
+			<h5>Programming Challenge #9 - "The Quarto Playing Framework, Part I"</h5>
+			<a href="assets/lisp/sessions/quarto-playing-pt1-demo.txt">quarto-playing-pt1-demo.txt</a>
+			</div>
+
+		    <div><br /></div>
+		  
+		    <div class="well">
+			11/26/2012
+			<h5>Programming Challenge #8 - "Modeling Quarto Objects"</h5>
+			<a href="assets/lisp/quarto.txt">quarto.lsp</a><br />
+			<a href="assets/lisp/qtests.txt">qtests.lsp</a><br />
+			<a href="assets/lisp/sessions/quarto-objects-demo.txt">quarto-objects-demo.txt</a>
+			</div>
+
+		    <div><br /></div>
+			
+		  	<div class="well">
+			11/14/2012
+			<a href="https://www.youtube.com/watch?v=Ux0TZqEAiK0">AI in Videogames</a><br />
+			<h5> This is a talk given by a professionnal video game developer and former robotics
+			    researcher at Carnegie Mellon University on the benefits of video games in the field
+				of AI. This specific excerpt is an overview of the benefits of programming AI in the 
+				context of a virtual environment rather than a real environment. </h5>
+			</div>
+
+		    <div><br /></div>
+		  
+		    <div class="well">
+			11/12/2012
+			<h5>Programming Challenge #7 - "Wizzard Adventure Game"</h5>
+			<a href="assets/lisp/wizzard.txt">wizzard.lsp</a><br />
+			<a href="assets/lisp/sessions/wizzard_demo.txt">wizzard_demo.txt</a>
+			</div>
+
+		    <div><br /></div>
+		  
+		    <div class="well">
+			10/29/2012
+			<h5>Programming Challenge #6 - "State Space Missionaries and Cannibals"</h5>
+			<a href="assets/lisp/ssmc.txt">ssmc.lsp</a><br />
+			<a href="assets/lisp/sessions/ssmc_demo.txt">ssmc_demo.txt</a>
+			</div>
+
+		    <div><br /></div>
+		  
+		  	<div class="well">
+			10/14/2012
+			<h5>Programming Challenge #5 - "Dice in CLOS"</h5>
+			<a href="assets/lisp/die.txt">die.lsp</a>
+			<a href="assets/lisp/accumulator.txt">accumulator.lsp</a><br />
+			<a href="assets/lisp/die-apps.txt">die-apps.lsp</a>
+			<a href="assets/lisp/sessions/die-demo.txt">die-demo</a><br />
+			<a href="assets/lisp/sessions/accumulator-demo.txt">accumulator-demo</a>
+			<a href="assets/lisp/sessions/roll-for-pair-demo.txt">roll-for-pair-demo</a><br />
+			<a href="assets/lisp/sessions/roll-for-sum-demo.txt">roll-for-sum-demo</a>
+			<a href="assets/lisp/sessions/expectation-demo.txt">expectation-demo</a>
+			</div>
+		  
+		    <div><br /></div>	
+		  
+		    <div class="well">
+			10/1/2012
+			<h5>Programming Challenge #4 - "Missionaries and Cannibals I"</h5>
+			<a href="assets/lisp/mc1.txt">mc.lsp</a><br />
+			<a href="assets/lisp/sessions/mc1_demo.txt">mc1_demo.txt</a>
+			</div>
+
+		    <div><br /></div>		  
+		  			
+		    <div class="well">
+			9/24/2012
+			<h5>Programming Challenge #3 - "List Processing"</h5>
+			<a href="assets/lisp/lp.txt">lp.lsp</a>
+			<a href="assets/lisp/sessions/pick.txt">pick.txt</a><br />
+			<a href="assets/lisp/sessions/various.txt">various.txt</a>
+			<a href="assets/lisp/sessions/sum-product.txt">sum-product.txt</a><br />
+			<a href="assets/lisp/sessions/iota-generate.txt">iota-generate.txt</a>
+			<a href="assets/lisp/sessions/factorial-power.txt">factorial-power.txt</a><br />
+			<a href="assets/lisp/sessions/filters.txt">filters.txt</a>
+			<a href="assets/lisp/sessions/take-from.txt">take-from.txt</a><br />
+			<a href="assets/lisp/sessions/permutation.txt">permutation.txt</a>
+			</div>
+		  
+		    <div><br /></div>		  
+		  
+			<div class="well">
+			9/18/2012
+			<h5>Book Question Set #1 - Introduction</h5>
+			<a href="assets/csc416_questionset1.pdf">csc416_questionset1.pdf</a>
+			</div>
+		  
+		    <div><br /></div>
+		  
+		    <div class="well">
+			9/10/2012
+			<h5>Programming Challenge #2 - "Simple Problems"</h5>
+			<a href="assets/lisp/pot.txt">pot.lsp</a>
+			<a href="assets/lisp/sessions/pot-demo.txt">pot-demo.txt</a><br />
+			<a href="assets/lisp/anw.txt">anw.lsp</a>
+			<a href="assets/lisp/sessions/anw-demo.txt">anw-demo.txt</a><br />
+			<a href="assets/lisp/sls.txt">sls.lsp</a>
+			<a href="assets/lisp/sessions/sls-demo.txt">sls-demo.txt</a>
+			</div>
+		  
+		    <div><br /></div>
+		  
+		    <div class="well">
+			9/8/2012
+			<h5>Programming Challenge #1 - "Sample Sessions"</h5>
+			<a href="assets/lisp/sessions/opening-session.txt">opening-session.txt</a>
+			<a href="assets/lisp/sessions/numeric-session.txt">numeric-session.txt</a>
+			<a href="assets/lisp/sessions/lp-session.txt">lp-session.txt</a>
+			</div>
 			
           </div>
-		  <div id="layout"></div>
+		  <div id="end"> </div>
         </div><!--/span9-->
-      </div><!--/row2-->
-	  
-	  <!-- Row 3 - Fluid Layout -->
-      <div class="row-fluid">
-		<div class="span3">
-          <div class="well sidebar-nav">
-		  <h4><img src="assets/img/ball1.png" alt="?" /> Create a liquid layout with HTML, CSS, and Javascript. This layout must support the following resolutions: 1024x768, 1680x1050. Explain why you would use a liquid layout. </h4>
-	      </div><!--/.well -->
-        </div><!--/span3-->
-		
-        <div class="span9">
-          <div class="hero-unit">
-            <div class="well">
-			<h4>There are so many different device/browser combinations it's mind boggling. Practically every single person's setup for veiwing web content is unique.
-			    When one is designing a website, it is important that it work with all possible (or at the very least, likely) combinations. A liquid layout based on
-				scaling objects via screen percentages is a nice way to make sure your content looks consistent across platforms!</h4>
-			</div>
-          </div>
-		  <div id="lplate"></div>
-        </div><!--/span9-->
-      </div><!--/row3-->
-	  
-	  <!-- Row 4 - License Plate Problem -->
-      <div class="row-fluid">
-		<div class="span3">
-          <div class="well sidebar-nav">
-		  <h4><img src="assets/img/ball1.png" alt="?" /> You own a license plate manufacturing company. Write a program that takes a population and determines the simplest pattern that will produce enough unique plates. Since all the plates that match the pattern will be generated, find the pattern that produces the least excess plates. Use a combination of letters (A-Z) and numbers (0-9).</h4>
-	      </div><!--/.well -->
-        </div><!--/span3-->
-		
-        <div class="span9">
-          <div class="hero-unit">
-          <form name="popform" class="well">
-			<label>Population</label>
-			<input name="popinput" type="text" class="span3" placeholder="Enter a number…">
-			<button type="button" class="btn" onclick="displayPop(this.form)">Submit</button>
-			<label name="poplabel" id="poplabel">Number of Plates</label>
-			<label name="excess" id="excess">Number of Excess Plates</label>
-			<label name="numbers" id="numbers">Number of  Numbers</label>
-			<label name="letters" id="letters">Number of  Letters</label>
-		  </form>
-          </div>
-        </div><!--/span9-->
-      </div><!--/row4-->
+      </div><!--/row1-->
 
 	  <hr>
 

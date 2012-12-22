@@ -1,0 +1,57 @@
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (+ 1 2 3 4 5 6 7 8 9 10)
+55
+[2]> (* 1 2 3 4 5 6 7 8 9 10)
+3628800
+[3]> (- 2 2 2)
+-2
+[4]> (+)
+0
+[5]> (*)
+1
+[6]> (sqrt 100)
+10
+[7]> (expt 7 50)
+1798465042647412146620280340569649349251249
+[8]> (* pi (* 2 10) )
+62.83185307179586477L0
+[9]> (* pi (expt 15 2) )
+706.8583470577034787L0
+[10]> (- (* pi (expt 12.6 2)) (* pi (expt 7.5 2)))
+322.04468
+[11]> (setf x1 1 y1 1)
+1
+[12]> (setf x2 2 y2 2)
+2
+[13]> (sqrt (+ (square(- x1 x2)) (square(- y1 y2))))
+
+*** - EVAL: undefined function SQUARE
+The following restarts are available:
+USE-VALUE      :R1      Input a value to be used instead of (FDEFINITION 'SQUARE
+).
+RETRY          :R2      Retry
+STORE-VALUE    :R3      Input a new value for (FDEFINITION 'SQUARE).
+ABORT          :R4      Abort main loop
+Break 1 [14]> :a
+[15]> (defun square(x) (* x x))
+SQUARE
+[16]> (sqrt (+ (square(- x1 x2)) (square(- y1 y2))))
+1.4142135
+[17]>

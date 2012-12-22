@@ -1,0 +1,97 @@
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "lp.lsp")
+;; Loading file lp.lsp ...
+;; Loaded file lp.lsp
+T
+[2]> (trace random-permutation)
+;; Tracing function RANDOM-PERMUTATION.
+(RANDOM-PERMUTATION)
+[3]> (random-permutation '(1 2 3 4 5))
+1. Trace: (RANDOM-PERMUTATION '(1 2 3 4 5))
+2. Trace: (RANDOM-PERMUTATION '(1 2 3 4))
+3. Trace: (RANDOM-PERMUTATION '(1 3 4))
+4. Trace: (RANDOM-PERMUTATION '(1 3))
+5. Trace: (RANDOM-PERMUTATION '(3))
+6. Trace: (RANDOM-PERMUTATION 'NIL)
+6. Trace: RANDOM-PERMUTATION ==> NIL
+5. Trace: RANDOM-PERMUTATION ==> (3)
+4. Trace: RANDOM-PERMUTATION ==> (1 3)
+3. Trace: RANDOM-PERMUTATION ==> (4 1 3)
+2. Trace: RANDOM-PERMUTATION ==> (2 4 1 3)
+1. Trace: RANDOM-PERMUTATION ==> (5 2 4 1 3)
+(5 2 4 1 3)
+[4]> (random-permutation '(A penny saved is a penny earned))
+1. Trace: (RANDOM-PERMUTATION '(A PENNY SAVED IS A PENNY EARNED))
+2. Trace: (RANDOM-PERMUTATION '(PENNY SAVED IS A PENNY EARNED))
+3. Trace: (RANDOM-PERMUTATION '(PENNY IS A PENNY EARNED))
+4. Trace: (RANDOM-PERMUTATION '(IS A PENNY EARNED))
+5. Trace: (RANDOM-PERMUTATION '(IS A PENNY))
+6. Trace: (RANDOM-PERMUTATION '(IS PENNY))
+7. Trace: (RANDOM-PERMUTATION '(PENNY))
+8. Trace: (RANDOM-PERMUTATION 'NIL)
+8. Trace: RANDOM-PERMUTATION ==> NIL
+7. Trace: RANDOM-PERMUTATION ==> (PENNY)
+6. Trace: RANDOM-PERMUTATION ==> (IS PENNY)
+5. Trace: RANDOM-PERMUTATION ==> (A IS PENNY)
+4. Trace: RANDOM-PERMUTATION ==> (EARNED A IS PENNY)
+3. Trace: RANDOM-PERMUTATION ==> (PENNY EARNED A IS PENNY)
+2. Trace: RANDOM-PERMUTATION ==> (SAVED PENNY EARNED A IS PENNY)
+1. Trace: RANDOM-PERMUTATION ==> (A SAVED PENNY EARNED A IS PENNY)
+(A SAVED PENNY EARNED A IS PENNY)
+[5]> (random-permutation '(lists (within lists) within (lists within lists)))
+1. Trace: (RANDOM-PERMUTATION '(LISTS (WITHIN LISTS) WITHIN (LISTS WITHIN LISTS)))
+2. Trace: (RANDOM-PERMUTATION '(LISTS (WITHIN LISTS) (LISTS WITHIN LISTS)))
+3. Trace: (RANDOM-PERMUTATION '(LISTS (LISTS WITHIN LISTS)))
+4. Trace: (RANDOM-PERMUTATION '((LISTS WITHIN LISTS)))
+5. Trace: (RANDOM-PERMUTATION 'NIL)
+5. Trace: RANDOM-PERMUTATION ==> NIL
+4. Trace: RANDOM-PERMUTATION ==> ((LISTS WITHIN LISTS))
+3. Trace: RANDOM-PERMUTATION ==> (LISTS (LISTS WITHIN LISTS))
+2. Trace: RANDOM-PERMUTATION ==> ((WITHIN LISTS) LISTS (LISTS WITHIN LISTS))
+1. Trace: RANDOM-PERMUTATION ==> (WITHIN (WITHIN LISTS) LISTS (LISTS WITHIN LISTS))
+(WITHIN (WITHIN LISTS) LISTS (LISTS WITHIN LISTS))
+[6]> (random-permutation '(9 18 1989))
+1. Trace: (RANDOM-PERMUTATION '(9 18 1989))
+2. Trace: (RANDOM-PERMUTATION '(9 1989))
+3. Trace: (RANDOM-PERMUTATION '(9))
+4. Trace: (RANDOM-PERMUTATION 'NIL)
+4. Trace: RANDOM-PERMUTATION ==> NIL
+3. Trace: RANDOM-PERMUTATION ==> (9)
+2. Trace: RANDOM-PERMUTATION ==> (1989 9)
+1. Trace: RANDOM-PERMUTATION ==> (18 1989 9)
+(18 1989 9)
+[7]> (random-permutation '(NY PA VT MA RI NJ CT))
+1. Trace: (RANDOM-PERMUTATION '(NY PA VT MA RI NJ CT))
+2. Trace: (RANDOM-PERMUTATION '(NY PA VT MA RI CT))
+3. Trace: (RANDOM-PERMUTATION '(NY PA VT MA CT))
+4. Trace: (RANDOM-PERMUTATION '(NY PA VT MA))
+5. Trace: (RANDOM-PERMUTATION '(NY VT MA))
+6. Trace: (RANDOM-PERMUTATION '(NY MA))
+7. Trace: (RANDOM-PERMUTATION '(MA))
+8. Trace: (RANDOM-PERMUTATION 'NIL)
+8. Trace: RANDOM-PERMUTATION ==> NIL
+7. Trace: RANDOM-PERMUTATION ==> (MA)
+6. Trace: RANDOM-PERMUTATION ==> (NY MA)
+5. Trace: RANDOM-PERMUTATION ==> (VT NY MA)
+4. Trace: RANDOM-PERMUTATION ==> (PA VT NY MA)
+3. Trace: RANDOM-PERMUTATION ==> (CT PA VT NY MA)
+2. Trace: RANDOM-PERMUTATION ==> (RI CT PA VT NY MA)
+1. Trace: RANDOM-PERMUTATION ==> (NJ RI CT PA VT NY MA)
+(NJ RI CT PA VT NY MA)

@@ -1,0 +1,770 @@
+; Missionaries and Cannibals problem solver
+;
+; This program is a state space problem solver for the classic
+;   "Missionaries and Cannibals" problem.  An explicit state
+;   space graph is grown in concert with breadth first search
+;   for a solution.
+;
+; Banks are represented as a 3-slot class consisting of
+;   missionaries, cannibals, and boat.
+;
+; States are represented as a 2-slot class consisting of
+;   left-bank and right-bank.
+;
+; Operators are represented as a 3-slot class consisting of a name,
+;   a precondition, and a description.
+;
+; Nodes are represented as a 4-slot class consisting of 
+;   a state, a parent node, a move (state space operator), and a name.
+;------------------------------------------------------------------
+
+;;; Modeling a bank
+
+( defclass bank ()
+  (
+    ( missionaries :accessor bank-missionaries :initarg :missionaries )
+	( cannibals :accessor bank-cannibals :initarg :cannibals )
+	( boat :accessor bank-boat :initarg :boat )
+  )
+)
+
+( defmethod display ( ( b bank ) )
+  ( format t "Missionaries= ~A Cannibals= ~A Boat= ~A~%"
+			 ( bank-missionaries b )
+			 ( bank-cannibals b )
+			 ( bank-boat b )
+  )
+  nil
+)
+
+( defmethod missionaries-size ( (  b bank ) )
+  ( list-length ( bank-missionaries b ) )
+)
+
+( defmethod cannibals-size ( ( b bank ) )
+  ( list-length ( bank-cannibals b ) )
+)
+
+( defmethod boat-p ( ( b bank ) )
+  ( eq ( bank-boat b ) 'b )
+)
+
+( defmethod copy-bank ( ( b bank ) )
+  ( make-instance 'bank
+    :missionaries ( bank-missionaries b )
+	:cannibals ( bank-cannibals b )
+    :boat ( bank-boat b )
+  )
+)
+;------------------------------------------------------------------
+
+;;; Modeling a state
+
+( defclass state ()
+  (
+    ( left-bank :accessor state-left-bank :initarg :left-bank )
+	( right-bank :accessor state-right-bank :initarg :right-bank )
+  )
+)
+
+( defmethod display ( ( s state ) )
+  ( display ( state-left-bank s ) )
+  ( display ( state-right-bank s ) )
+  nil
+)
+
+( defmethod copy-state ( ( s state ) &aux c )
+  ( setf c ( make-instance 'state
+    :left-bank ( copy-bank ( state-left-bank s ) )
+	:right-bank ( copy-bank ( state-right-bank s ) )
+  ) )
+  c
+)
+
+( defmethod goalp ( ( s state ) )
+  ( and
+    ( left-bank-ok-p ( state-left-bank s ) )
+	( right-bank-ok-p ( state-right-bank s ) )
+  )
+)
+
+( defmethod left-bank-ok-p ( ( b bank ) )
+  ( and
+    ( equal ( bank-missionaries b ) nil )
+	( equal ( bank-cannibals b ) nil )
+	( equal ( bank-boat b ) nil )
+  )
+)
+
+( defmethod right-bank-ok-p ( ( b bank ) )
+  ( and
+    ( equal ( bank-missionaries b ) '( m m m ) )
+	( equal ( bank-cannibals b ) '( c c c ) )
+	( equal ( bank-boat b ) 'b )
+  )
+)
+;------------------------------------------------------------------
+
+;;; Modeling a node
+
+( defclass node ()
+  (
+    ( name :accessor node-name :initarg :name )
+	( state :accessor node-state :initarg :state )
+	( parent :accessor node-parent :initarg :parent )
+	( operator :accessor node-operator :initarg :operator )
+  )
+)
+
+( defmethod display ( ( n node ) )
+  ( princ ( node-name n ) )
+  ( write-string " " )
+  ( if ( not ( rootp n ) )
+    ( let ()
+	  ( princ ( node-name ( node-parent n ) ) )
+	  ( princ " " )
+	  ( display ( node-operator n ) )
+	)
+  )
+  ( terpri )
+  ( display ( node-state n ) )
+  nil
+)
+
+( defmethod rootp ( ( n node ) )
+  ( eq ( node-name n ) 'root )
+)
+
+( defmethod goalp ( ( n node ) )
+  ( and
+    ( left-bank-ok-p ( state-left-bank ( node-state n ) ) )
+	( right-bank-ok-p ( state-right-bank ( node-state n ) ) )
+  )
+)
+
+;------------------------------------------------------------------
+
+;;; Checking to see if a node has already been explored
+
+( defmethod exploredp ( ( n node ) )
+  ( member-state-p ( node-state n ) *explored* )
+)
+
+( defmethod member-state-p ( ( s state ) ( l list ) )
+  ( cond
+    ( ( null l )
+	  nil
+	)
+	( ( equal-state-p s ( node-state ( first l ) ) )
+	  t
+	)
+	( t
+	  ( member-state-p s ( rest l ) )
+	)
+  )
+)
+
+( defmethod equal-state-p ( ( s1 state ) ( s2 state ) )
+  ( and
+    ( equal-bank-p ( state-left-bank s1 ) ( state-left-bank s2 ) )
+	( equal-bank-p ( state-right-bank s1) ( state-right-bank s2 ) )
+  )
+)
+
+( defmethod equal-bank-p ( ( b1 bank ) ( b2 bank ) )
+  ( and
+    ( equal ( bank-missionaries b1 ) ( bank-missionaries b2 ) )
+    ( equal ( bank-cannibals b1 ) ( bank-cannibals b2 ) )
+    ( equal ( bank-boat b1 ) ( bank-boat b2 ) )
+  )
+)
+;------------------------------------------------------------------
+
+;;; Name generator class
+
+( defclass name-generator ()
+  ( ( prefix
+      :accessor name-generator-prefix
+	  :initarg :prefix
+	  :initform "name"
+	)
+	( nr :accessor name-generator-nr
+	     :initform 0
+	)
+  )
+)
+
+( defmethod next ( ( ng name-generator ) )
+  ( setf ( name-generator-nr ng ) ( + 1 ( name-generator-nr ng ) ) )
+  ( concatenate 'string
+    ( name-generator-prefix ng )
+	( write-to-string ( name-generator-nr ng ) )
+  )
+)
+
+;------------------------------------------------------------------
+
+;;; Modeling an operator
+
+( defclass operator ()
+  (
+    ( name :accessor operator-name :initarg :name )
+	( precondition :accessor operator-precondition :initarg :precondition )
+	( description :accessor operator-description :initarg :description )
+  )
+)
+
+( defmethod display ( ( op operator ) )
+  ( princ ( operator-name op ) )
+)
+
+( defmethod describe-operators ()
+  ( mapcar #'describe-operator *operator-list* )
+  ( terpri )
+  nil
+)
+
+( defmethod describe-operator ( ( op operator ) )
+  ( format t "Operator name= ~A" ( operator-name op ) )
+  ( terpri )
+  ( format t "Precondition= ~A" ( operator-precondition op ) )
+  ( terpri )
+  ( format t "Description= ~A" ( operator-description op ) )
+  ( terpri )
+  ( terpri )
+)
+
+;------------------------------------------------------------------
+;; establish the possible operators
+
+(defmethod establish-operators ()
+  (setf *move-c-lr*
+    ( make-instance 'operator
+	  :name 'move-c-lr
+	  :precondition "Number of c on left bank > 0."
+	  :description "Move a cannibal to the right bank."
+	)
+  )
+  (setf *move-m-lr*
+    ( make-instance 'operator
+	  :name 'move-m-lr
+	  :precondition "Number m on left bank > 0."
+	  :description "Move a missionary to the right bank."
+	)
+  )
+  (setf *move-mm-lr*
+    ( make-instance 'operator
+	  :name 'move-mm-lr
+	  :precondition "Missionaries on left bank > 1."
+	  :description "Move 2 missionaries to the right bank."
+	)
+  )
+  (setf *move-mc-lr*
+    ( make-instance 'operator
+	  :name 'move-mc-lr
+	  :precondition "Number of c on left bank > 0 and number of m on left bank > 0."
+	  :description "Move a missionary and cannibal to the right bank."
+	)
+  )
+  (setf *move-cc-lr*
+    ( make-instance 'operator
+	  :name 'move-cc-lr
+	  :precondition "Number of c on left bank > 1."
+	  :description "Move two cannibals to the right bank."
+	)
+  )
+    (setf *move-c-rl*
+    ( make-instance 'operator
+	  :name 'move-c-rl
+	  :precondition "Number of c on right bank > 0."
+	  :description "Move a cannibal to the left bank."
+	)
+  )
+  (setf *move-m-rl*
+    ( make-instance 'operator
+	  :name 'move-m-rl
+	  :precondition "Number m on right bank > 0."
+	  :description "Move a missionary to the left bank."
+	)
+  )
+  (setf *move-mm-rl*
+    ( make-instance 'operator
+	  :name 'move-mm-rl
+	  :precondition "Missionaries on right bank > 1."
+	  :description "Move 2 missionaries to the left bank."
+	)
+  )
+  (setf *move-mc-rl*
+    ( make-instance 'operator
+	  :name 'move-mc-rl
+	  :precondition "Number of c on right bank > 0 and number of m on right bank > 0."
+	  :description "Move a missionary and cannibal to the left bank."
+	)
+  )
+  (setf *move-cc-rl*
+    ( make-instance 'operator
+	  :name 'move-cc-rl
+	  :precondition "Number of c on right bank > 1."
+	  :description "Move two cannibals to the left bank."
+	)
+  )
+  (setf *operator-list*
+    (list *move-m-lr* *move-c-lr* *move-mm-lr* *move-mc-lr* *move-cc-lr*
+	      *move-m-rl* *move-c-rl* *move-mm-rl* *move-mc-rl* *move-cc-rl*
+	)
+  )
+  nil
+)
+
+;------------------------------------------------------------------
+
+;;; Main method
+
+( defmethod mc ()
+  ( establish-operators )
+  ( setup )
+  ( solve )
+)
+
+;------------------------------------------------------------------
+
+;;; The setup
+
+( defmethod setup ( &aux root lb rb istate )
+  ;; establish root node
+  ( setf lb ( make-instance 'bank :missionaries '( m m m ) :cannibals '( c c c ) :boat 'b ) )
+  ( setf rb ( make-instance 'bank :missionaries '() :cannibals '() :boat nil ) )
+  ( setf istate ( make-instance 'state
+    :left-bank lb
+	:right-bank rb
+	)
+  )
+  ( setf root ( make-instance 'node
+    :state istate
+	:name 'root
+	)
+  )
+  ;; initialize list of unexplored nodes
+  ( setf *unexplored* ( list root ) )
+  ;; initialize list of explored nodes
+  ( setf *explored* () )
+  ; get ready to create good names
+  ( setf *ng* ( make-instance 'name-generator :prefix "N" ) )
+)
+
+;------------------------------------------------------------------
+
+;;; breadth first search
+
+( defmethod solve ( &aux kids e-node )
+  ( if *tracing-search* ( let ()
+    ( terpri ) ( write-line ">>> Solve" ) ( terpri )
+	( display-explored-nodes )
+	( display-unexplored-nodes )
+  ) )
+  ( cond
+    ( ( null *unexplored* )
+	  ( write-line "There is no solution." )
+	  ( return-from solve NIL )
+	)
+  )
+  ( setf e-node ( pop *unexplored* ) )
+  ( if *tracing-search* ( let ()
+    ( display-e-node e-node )
+  ) )
+  ( cond
+    ( ( goalp ( node-state e-node ) )
+	  ( display-solution e-node )
+	)
+	( ( exploredp e-node )
+	  ( solve )
+	)
+	( t
+	  ( push e-node *explored* )
+	  ( setf kids ( children-of e-node ) )
+	  ( setf *unexplored* ( append *unexplored* kids ) )
+	  ( solve )
+	)
+  )
+  NIL
+)
+
+( defmethod display-e-node ( ( n node ) )
+  ( write-line "E-NODE " ) ( terpri )
+  ( display n )
+  nil
+)
+
+;------------------------------------------------------------------
+
+;;; generating children
+(defmethod children-of ((e-node node) &aux kids)
+  (if (applicablep *move-m-lr* (node-state e-node))
+    (push (child-of e-node *move-m-lr*) kids)
+  )
+  (if (applicablep *move-c-lr* (node-state e-node))
+    (push (child-of e-node *move-c-lr*) kids)
+  )
+  (if (applicablep *move-mm-lr* (node-state e-node))
+    (push (child-of e-node *move-mm-lr*) kids)
+  )
+  (if (applicablep *move-mc-lr* (node-state e-node))
+    (push (child-of e-node *move-mc-lr*) kids)
+  )
+  (if (applicablep *move-cc-lr* (node-state e-node))
+    (push (child-of e-node *move-cc-lr*) kids)
+  )
+  (if (applicablep *move-m-rl* (node-state e-node))
+    (push (child-of e-node *move-m-rl*) kids)
+  )
+  (if (applicablep *move-c-rl* (node-state e-node))
+    (push (child-of e-node *move-c-rl*) kids)
+  )
+  (if (applicablep *move-mm-rl* (node-state e-node))
+    (push (child-of e-node *move-mm-rl*) kids)
+  )
+  (if (applicablep *move-mc-rl* (node-state e-node))
+    (push (child-of e-node *move-mc-rl*) kids)
+  )
+  (if (applicablep *move-cc-rl* (node-state e-node))
+    (push (child-of e-node *move-cc-rl*) kids)
+  )
+  kids
+)
+
+( defmethod child-of ( (  n node ) ( o operator ) &aux c )
+  ( setf new-node ( make-instance 'node ) )
+  ( setf ( node-name new-node ) ( next *ng* ) )
+  ( setf ( node-parent new-node ) n )
+  ( setf ( node-operator new-node ) o )
+  ( setf c ( copy-state ( node-state n ) ) )
+  ( apply-operator o c )
+  ( setf ( node-state new-node ) c )
+  new-node
+)
+
+(defmethod apply-operator ((o operator) (c state) &aux leftb rightb)
+  (setf leftb (state-left-bank c))
+  (setf rightb (state-right-bank c))
+  (cond
+    ((eq (operator-name o) 'move-m-lr)
+	  (move-miss leftb rightb)
+	  (move-boat leftb rightb)
+	)
+	((eq (operator-name o) 'move-c-lr)
+	  (move-cann leftb rightb)
+	  (move-boat leftb rightb)
+	)
+	((eq (operator-name o) 'move-mm-lr)
+	  (move-miss leftb rightb)
+	  (move-miss leftb rightb)
+	  (move-boat leftb rightb)
+	)
+	((eq (operator-name o) 'move-mc-lr)
+	  (move-miss leftb rightb)
+	  (move-cann leftb rightb)
+	  (move-boat leftb rightb)
+	)
+	((eq (operator-name o) 'move-cc-lr)
+	  (move-cann leftb rightb)
+	  (move-cann leftb rightb)
+	  (move-boat leftb rightb)
+	)
+	((eq (operator-name o) 'move-m-rl)
+	  (move-miss rightb leftb)
+	  (move-boat rightb leftb)
+	)
+	((eq (operator-name o) 'move-c-rl)
+	  (move-cann rightb leftb)
+	  (move-boat rightb leftb)
+	)
+	((eq (operator-name o) 'move-mm-rl)
+	  (move-miss rightb leftb)
+	  (move-miss rightb leftb)
+	  (move-boat rightb leftb)
+	)
+	((eq (operator-name o) 'move-mc-rl)
+	  (move-miss rightb leftb)
+	  (move-cann rightb leftb)
+	  (move-boat rightb leftb)
+	)
+	((eq (operator-name o) 'move-cc-rl)
+	  (move-cann rightb leftb)
+	  (move-cann rightb leftb)
+	  (move-boat rightb leftb)
+	)
+  )
+  (setf (state-left-bank c) leftb)
+  (setf (state-right-bank c) rightb)
+  nil
+)
+
+;------------------------------------------------------------------
+
+;;; Check to see if an operator is applicable in a particular state
+
+( defmethod applicablep ( ( op operator ) ( s state ) )
+  ( cond
+    ( ( eq ( operator-name op ) 'move-c-lr )
+	  ( applicable-move-c-lr-p s )
+	)
+	( ( eq ( operator-name op ) 'move-m-lr )
+	  ( applicable-move-m-lr-p s )
+	)
+	( ( eq ( operator-name op ) 'move-cc-lr )
+	  ( applicable-move-cc-lr-p s )
+	)
+	( ( eq ( operator-name op ) 'move-mm-lr )
+	  ( applicable-move-mm-lr-p s )
+	)
+	( ( eq ( operator-name op ) 'move-mc-lr )
+	  ( applicable-move-mc-lr-p s )
+	)
+	( ( eq ( operator-name op ) 'move-c-rl )
+	  ( applicable-move-c-rl-p s )
+	)
+	( ( eq ( operator-name op ) 'move-m-rl )
+	  ( applicable-move-m-rl-p s ) 
+	)
+	( ( eq ( operator-name op ) 'move-cc-rl )
+	  ( applicable-move-cc-rl-p s )
+	)
+	( ( eq ( operator-name op ) 'move-mm-rl )
+	  ( applicable-move-mm-rl-p s )
+	)
+	( ( eq ( operator-name op ) 'move-mc-rl )
+	  ( applicable-move-mc-rl-p s )
+	)
+  )
+)
+
+;; applicable if there are more than 0 cannibals on left-bank
+( defmethod applicable-move-c-lr-p ( ( s state ) )
+  ( and
+    ( > ( cannibals-size ( state-left-bank s ) ) 0 ) 
+	( or 
+	  ( < ( cannibals-size ( state-right-bank s ) ) 
+	      ( missionaries-size (state-right-bank s) ) 
+	  )
+	  ( = ( missionaries-size ( state-right-bank s ) ) 0 )
+	)
+	( boat-p ( state-left-bank s ) )
+  )
+)
+
+
+;; applicable if there are more than 0 missionaries on left-bank
+( defmethod applicable-move-m-lr-p ( ( s state ) )
+  ( and
+    ( > ( missionaries-size ( state-left-bank s ) ) 0 ) 
+	( < ( cannibals-size ( state-left-bank s ) ) (missionaries-size (state-left-bank s)) )
+	( or
+	  ( = ( missionaries-size ( state-right-bank s ) ) 
+	      ( cannibals-size ( state-right-bank s ) ) )
+	  ( = ( cannibals-size ( state-right-bank s ) ) 1 )
+	)
+	( boat-p ( state-left-bank s ) )
+  )
+)
+
+;; applicable if there is more than 1 cannibal on left-bank
+( defmethod applicable-move-cc-lr-p ( ( s state ) )
+  ( and
+    ( > ( cannibals-size ( state-left-bank s ) ) 1 )
+	( or
+	  ( < ( cannibals-size ( state-right-bank s ) ) 
+	      ( - ( missionaries-size ( state-right-bank s ) ) 1 ) 
+      )
+	  ( = ( missionaries-size ( state-right-bank s ) ) 0 )
+	)
+	( boat-p ( state-left-bank s ) )
+  )
+)
+
+;; applicable if there is more than 1 missionary on left-bank
+( defmethod applicable-move-mm-lr-p ( ( s state ) )
+  ( and
+	( > ( missionaries-size ( state-left-bank s ) ) 1 )
+	    ( or
+		  ( and 
+		  ( = ( missionaries-size ( state-left-bank s ) ) 3 )
+		  ( = ( cannibals-size ( state-left-bank s ) ) 1 ) 
+		  )
+          (	and 
+		  ( = ( missionaries-size ( state-left-bank s ) ) 2 )
+		  ( = ( cannibals-size ( state-left-bank s ) ) 2 ) 
+		  )	  
+		)
+	( boat-p ( state-left-bank s ) )
+  )
+)
+
+;; applicable if there are more than 0 missionaries and 0 cannibals on left-bank
+( defmethod applicable-move-mc-lr-p ( ( s state ) )
+  ( and
+    ( > ( missionaries-size ( state-left-bank s ) ) 0 ) 
+	( > ( cannibals-size ( state-left-bank s ) ) 0 )
+	( >= (missionaries-size (state-right-bank s)) (cannibals-size (state-right-bank s)))
+	( boat-p ( state-left-bank s ) )
+  )
+)
+
+;; applicable if there are more than 0 cannibals on right-bank
+( defmethod applicable-move-c-rl-p ( ( s state ) )
+  ( and
+    ( > ( cannibals-size ( state-right-bank s ) ) 0 )
+	( or 
+	  ( < ( cannibals-size ( state-left-bank s ) ) 
+	      ( missionaries-size (state-left-bank s) ) 
+	  )
+	  ( = ( missionaries-size ( state-left-bank s ) ) 0 ) 
+	)
+	( boat-p ( state-right-bank s ) )
+  )
+)
+
+;; applicable if there are more than 0 missionaries on right-bank
+( defmethod applicable-move-m-rl-p ( ( s state ) )
+  ( and
+    ( > ( missionaries-size ( state-right-bank s ) ) 0 ) 
+	( < ( cannibals-size ( state-right-bank s ) ) (missionaries-size (state-right-bank s)) )
+	( or
+	  ( = ( missionaries-size ( state-left-bank s ) ) 
+	      ( cannibals-size ( state-left-bank s ) ) )
+	  ( = ( cannibals-size ( state-left-bank s ) ) 1 )
+	)
+	( boat-p ( state-right-bank s ) )
+  )
+)
+
+
+;; applicable if there is more than 1 cannibal on right-bank
+( defmethod applicable-move-cc-rl-p ( ( s state ) )
+  ( and
+    ( > ( cannibals-size ( state-right-bank s ) ) 1 )
+	( or
+	  ( < ( cannibals-size ( state-left-bank s ) ) 
+	      ( - ( missionaries-size ( state-left-bank s ) ) 1 ) 
+      )
+	  ( = ( missionaries-size ( state-left-bank s ) ) 0 )
+	)
+	( boat-p ( state-right-bank s ) )
+  )
+)
+
+;; applicable if there is more than 1 missionary on right-bank
+( defmethod applicable-move-mm-rl-p ( ( s state ) )
+  ( and
+	( > ( missionaries-size ( state-right-bank s ) ) 1 )
+	    ( or
+		  ( and 
+		  ( = ( missionaries-size ( state-right-bank s ) ) 3 )
+		  ( = ( cannibals-size ( state-right-bank s ) ) 1 ) 
+		  )
+          (	and 
+		  ( = ( missionaries-size ( state-right-bank s ) ) 2 )
+		  ( = ( cannibals-size ( state-right-bank s ) ) 2 ) 
+		  )	  
+		)
+	( boat-p ( state-right-bank s ) )
+  )
+)
+
+;; applicable if there are more than 0 missionaries and 0 cannibals on right-bank
+( defmethod applicable-move-mc-rl-p ( ( s state ) )
+  ( and
+    ( > ( missionaries-size ( state-right-bank s ) ) 0 ) 
+	( > ( cannibals-size ( state-right-bank s ) ) 0 )
+	( <= ( cannibals-size ( state-left-bank s ) ) 
+	     ( missionaries-size (state-left-bank s) ) )
+	( boat-p ( state-right-bank s ) )
+  )
+)
+
+;------------------------------------------------------------------
+
+;;; Construct and display the solution
+
+( defmethod display-solution ( ( n node ) )
+  ( cond
+    ( ( rootp n )
+	  ( terpri )
+	)
+	( t
+	  ( display-solution ( node-parent n ) )
+	  ( princ ( operator-description ( node-operator n ) ) )
+	  ( terpri )
+	)
+  )
+  nil
+)
+
+;------------------------------------------------------------------
+
+;;; Basic display commands
+
+( defmethod display-explored-nodes ()
+  ( prin1 'explored ) ( terpri ) ( terpri )
+  ( mapcar #'display *explored* )
+  ( terpri )
+  nil
+)
+
+( defmethod display-unexplored-nodes ()
+  ( prin1 'unexplored ) ( terpri ) ( terpri )
+  ( mapcar #'display *unexplored* )
+  nil
+)
+
+;------------------------------------------------------------------
+
+; Basic display commands (cont)
+
+( defmethod new-line ()
+  ( terpri )
+)
+
+( defmethod print-new-line ( o )
+  ( prin1 o ) ( terpri )
+)
+
+( defmethod print-no-new-line ( o )
+  ( prin1 o )
+)
+
+;------------------------------------------------------------------
+;;; Helpers for operator application
+
+(defmethod move-miss ((fromb bank)(tob bank))
+  (setf (bank-missionaries fromb) (remove 'm (bank-missionaries fromb) :count 1))
+  (setf (bank-missionaries tob) (snoc 'm (bank-missionaries tob)))
+)  
+
+(defmethod move-cann ((fromb bank)(tob bank))
+  (setf (bank-cannibals fromb) (remove 'c (bank-cannibals fromb) :count 1))
+  (setf (bank-cannibals tob) (snoc 'c (bank-cannibals tob)))
+)  
+
+(defmethod move-boat ((fromb bank)(tob bank))
+  (setf (bank-boat fromb) nil)
+  (setf (bank-boat tob) 'b)
+)
+
+;------------------------------------------------------------------
+
+; snoc
+( defun snoc ( x lst )
+  ( cond
+    ( ( null lst )
+	  ( list x )
+    )
+    ( t
+	  ( cons ( car lst ) ( snoc x ( cdr lst ) ) )
+    )
+  )
+)
+
+;------------------------------------------------------------------
+
+;;; establish the trace flag
+( setf *tracing-search* t)

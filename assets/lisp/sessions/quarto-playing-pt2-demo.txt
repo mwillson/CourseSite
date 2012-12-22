@@ -1,0 +1,719 @@
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "qtests.lsp")
+;; Loading file qtests.lsp ...
+;;  Loading file quarto.lsp ...
+;;   Loading file lp.lsp ...
+;;   Loaded file lp.lsp
+;;  Loaded file quarto.lsp
+;; Loaded file qtests.lsp
+T
+[2]> (task69--change-player-demo)
+Name of player 1? mark
+Name of player 2? bob
+Who will move first, MARK or BOB? mark
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+Change player ...
+< PLAYER NAME=BOB >
+< PLAYER NAME=MARK >
+Change player ...
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+NIL
+[3]> (task72--size-predicates-demo)
+P is small: T
+Q is small: NIL
+P is big: NIL
+Q is big: T
+NIL
+[4]> (task74--style-predicates-demo)
+P is hollow: T
+Q is hollow: NIL
+P is solid: NIL
+Q is solid: T
+NIL
+[5]> (task76--shape-predicates-demo)
+P is circle: T
+Q is circle: NIL
+P is square: NIL
+Q is square: T
+NIL
+[6]> (task81--filter-programs-demo)
+Filtered by size, small: ((b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Filtered by size, big: ((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+])
+Filtered by color, blue: ((B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+])
+Filtered by color, red: ((R-) [R-] (R+) [R+] (r-) [r-] (r+) [r+])
+Filtered by style, hollow: ((B-) [B-] (R-) [R-] (b-) [b-] (r-) [r-])
+Filtered by style, solid: ((B+) [B+] (R+) [R+] (b+) [b+] (r+) [r+])
+Filtered by shape, circle: ((B-) (B+) (R-) (R+) (b-) (b+) (r-) (r+))
+Filtered by shape, square: ([B-] [B+] [R-] [R+] [b-] [b+] [r-] [r+])
+NIL
+[7]> (task83--parse-piece-description-demo)
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+ ((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+])
+Candidates after color filtering are
+ ((B-) [B-] (B+) [B+])
+Candidates after style filtering are
+ ((B+) [B+])
+Candidates after shape filtering are
+ ([B+])
+The selection is
+ [B+]
+(BIG BLUE SOLID SQUARE) -> [B+]
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+ ((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+])
+Candidates after color filtering are
+ ((R-) [R-] (R+) [R+])
+Candidates after style filtering are
+ ((R+) [R+])
+Candidates after shape filtering are
+ ((R+))
+The selection is
+ (R+)
+(BIG RED SOLID CIRCLE) -> (R+)
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after color filtering are
+ ((B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+])
+Candidates after style filtering are
+ ((B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+])
+Candidates after shape filtering are
+ ([B-] [B+] [b-] [b+])
+The selection is
+ [b+]
+(BLUE SQUARE) -> [b+]
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+ ((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+])
+Candidates after color filtering are
+ ((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+])
+Candidates after style filtering are
+ ((B-) [B-] (R-) [R-])
+Candidates after shape filtering are
+ ((B-) (R-))
+The selection is
+ (R-)
+(BIG HOLLOW CIRCLE) -> (R-)
+NIL
+[8]> (task85--select-piece-demo)
+Which piece, X? (big blue)
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+ ((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+])
+Candidates after color filtering are
+ ((B-) [B-] (B+) [B+])
+Candidates after style filtering are
+ ((B-) [B-] (B+) [B+])
+Candidates after shape filtering are
+ ((B-) [B-] (B+) [B+])
+The selection is
+ [B+]
+Piece selected is [B+]
+Which piece, X? (red small)
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+ ((b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after color filtering are
+ ((r-) [r-] (r+) [r+])
+Candidates after style filtering are
+ ((r-) [r-] (r+) [r+])
+Candidates after shape filtering are
+ ((r-) [r-] (r+) [r+])
+The selection is
+ (r+)
+Piece selected is (r+)
+Which piece, X? (hollow)
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after color filtering are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after style filtering are
+ ((B-) [B-] (R-) [R-] (b-) [b-] (r-) [r-])
+Candidates after shape filtering are
+ ((B-) [B-] (R-) [R-] (b-) [b-] (r-) [r-])
+The selection is
+ (b-)
+Piece selected is (b-)
+Which piece, X? (circle small)
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+ ((b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after color filtering are
+ ((b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after style filtering are
+ ((b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after shape filtering are
+ ((b-) (b+) (r-) (r+))
+The selection is
+ (r+)
+Piece selected is (r+)
+Which piece, X? (big square red)
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+ ((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+])
+Candidates after color filtering are
+ ((R-) [R-] (R+) [R+])
+Candidates after style filtering are
+ ((R-) [R-] (R+) [R+])
+Candidates after shape filtering are
+ ([R-] [R+])
+The selection is
+ [R+]
+Piece selected is [R+]
+NIL
+[9]> (task87--available-locations-demo)
+(D1 D2 D3 D4 C1 C2 C3 C4 A1 A2 A3 A4)
+(D1 D2 D4 C1 C2 C4 B1 B2 B4 A1 A2 A4)
+(D2 D3 D4 C1 C3 C4 B1 B2 B4 A1 A2 A3)
+(D1 D2 C1 C2 B3 B4 A3 A4)
+[10]> (task89--select-location-demo)
+Quarto board with pieces for sld ...
+D   [B-] **** **** ****
+C   **** [B+] **** ****
+B   **** **** [b-] ****
+A   **** **** **** [b+]
+     1    2    3    4
+<e [B-], X? (D2 D3 D4 C1 C3 C4 B1 B2 B4 A1 A2 A3) A3
+Location selected is A3
+NIL
+[11]> (task91--place-piece-on-board-demo)
+BBHC: Placing piece (B-) on cell A1 ...
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   (B-) **** **** ****
+     1    2    3    4
+BBHS: Placing piece [B-] on cell C1 ...
+D   **** **** **** ****
+C   [B-] **** **** ****
+B   **** **** **** ****
+A   (B-) **** **** ****
+     1    2    3    4
+SBSS: Placing piece [b+] on cell A1 ...
+D   **** **** **** ****
+C   [B-] **** **** ****
+B   **** **** **** ****
+A   [b+] **** **** ****
+     1    2    3    4
+SRSC: Placing piece (r+) on cell B3 ...
+D   **** **** **** ****
+C   [B-] **** **** ****
+B   **** **** (r+) ****
+A   [b+] **** **** ****
+     1    2    3    4
+NIL
+[12]> (task93--place-piece-demo)
+Quarto board with pieces for ppd ...
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+(R-) [R-] (R+) [R+] (r-) [r-] (r+) [r+]
+(B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+]
+On which cell will you place [R-], X? (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2
+< (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2 A3 A4) A2
+
+X: Placing piece [R-] on cell A2 ...
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** [R-] **** ****
+     1    2    3    4
+(R-) (R+) [R+] (r-) [r-] (r+) [r+]
+(B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+]
+On which cell will you place (R+), X? (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A3
+< X? (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A3 A4) D1
+
+X: Placing piece (R+) on cell D1 ...
+D   (R+) **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** [R-] **** ****
+     1    2    3    4
+(R-) [R+] (r-) [r-] (r+) [r+]
+(B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+]
+On which cell will you place [r-], X? (D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A3 A4
+<-], X? (D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A3 A4) D3
+
+X: Placing piece [r-] on cell D3 ...
+D   (R+) **** [r-] ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** [R-] **** ****
+     1    2    3    4
+(R-) [R+] (r-) (r+) [r+]
+(B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+]
+< (R-), X? (D2 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A3 A4)
+X: Placing piece (R-) on cell B4 ...
+D   (R+) **** [r-] ****
+C   **** **** **** ****
+B   **** **** **** (R-)
+A   **** [R-] **** ****
+     1    2    3    4
+[R+] (r-) (r+) [r+]
+(B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+]
+<e [b-], X? (D2 D4 C1 C2 C3 C4 B1 B2 B3 A1 A3 A4) C3
+X: Placing piece [b-] on cell C3 ...
+D   (R+) **** [r-] ****
+C   **** **** [b-] ****
+B   **** **** **** (R-)
+A   **** [R-] **** ****
+     1    2    3    4
+[R+] (r-) (r+) [r+]
+(B-) [B-] (B+) [B+] (b-) (b+) [b+]
+NIL
+[18]> (task94--make-move-demo)
+Name of player 1? mark
+Name of player 2? bob
+Who will move first, MARK or BOB? mark
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+Current player = MARK
+Move 1
+(R-) [R-] (R+) [R+] (r-) [r-] (r+) [r+]
+(B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+]
+Which piece, MARK? (big red hollow circle)
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+ ((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+])
+Candidates after color filtering are
+ ((R-) [R-] (R+) [R+])
+Candidates after style filtering are
+ ((R-) [R-])
+Candidates after shape filtering are
+ ((R-))
+The selection is
+ (R-)
+MARK: I select (R-) for you to place on the board.
+On which cell will you place (R-), BOB? (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1
+< (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2 A3 A4) D1
+
+BOB: Placing piece (R-) on cell D1 ...
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   (R-) **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+Current player = MARK
+Move 2
+[R-] (R+) [R+] (r-) [r-] (r+) [r+]
+(B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+]
+Which piece, MARK? (big blue hollow square)
+The available pieces are
+ ((B-) [B-] (B+) [B+] [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after size filtering are
+ ((B-) [B-] (B+) [B+] [R-] (R+) [R+])
+Candidates after color filtering are
+ ((B-) [B-] (B+) [B+])
+Candidates after style filtering are
+ ((B-) [B-])
+Candidates after shape filtering are
+ ([B-])
+The selection is
+ [B-]
+MARK: I select [B-] for you to place on the board.
+On which cell will you place [B-], BOB? (D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2
+<OB? (D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2 A3 A4) D2
+
+BOB: Placing piece [B-] on cell D2 ...
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   (R-) [B-] **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+Current player = MARK
+Move 3
+[R-] (R+) [R+] (r-) [r-] (r+) [r+]
+(B-) (B+) [B+] (b-) [b-] (b+) [b+]
+Which piece, MARK? (small red solid circle)
+The available pieces are
+ ((B-) (B+) [B+] [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after size filtering are
+ ((b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after color filtering are
+ ((r-) [r-] (r+) [r+])
+Candidates after style filtering are
+ ((r+) [r+])
+Candidates after shape filtering are
+ ((r+))
+The selection is
+ (r+)
+MARK: I select (r+) for you to place on the board.
+On which cell will you place (r+), BOB? (D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2 A3
+<, BOB? (D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2 A3 A4) A4
+
+BOB: Placing piece (r+) on cell A4 ...
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   (R-) [B-] **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** (r+)
+     1    2    3    4
+Current player = MARK
+Move 4
+[R-] (R+) [R+] (r-) [r-] [r+]
+(B-) (B+) [B+] (b-) [b-] (b+) [b+]
+Which piece, MARK? (solid)
+The available pieces are
+ ((B-) (B+) [B+] [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] [r+])
+Candidates after size filtering are
+ ((B-) (B+) [B+] [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] [r+])
+Candidates after color filtering are
+ ((B-) (B+) [B+] [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] [r+])
+Candidates after style filtering are
+ ((B+) [B+] (R+) [R+] (b+) [b+] [r+])
+Candidates after shape filtering are
+ ((B+) [B+] (R+) [R+] (b+) [b+] [r+])
+The selection is
+ [r+]
+MARK: I select [r+] for you to place on the board.
+On which cell will you place [r+], BOB? (D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2 A3)
+<r+], BOB? (D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2 A3) C3
+
+BOB: Placing piece [r+] on cell C3 ...
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   (R-) [B-] **** ****
+C   **** **** [r+] ****
+B   **** **** **** ****
+A   **** **** **** (r+)
+     1    2    3    4
+Current player = MARK
+NIL
+[14]> (task95--move-demo)
+Name of player 1? mark
+Name of player 2? bob
+Who will move first, MARK or BOB? mark
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+Current player = MARK
+Move 1
+(R-) [R-] (R+) [R+] (r-) [r-] (r+) [r+]
+(B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+]
+Which piece, MARK? (big blue)
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+ ((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+])
+Candidates after color filtering are
+ ((B-) [B-] (B+) [B+])
+Candidates after style filtering are
+ ((B-) [B-] (B+) [B+])
+Candidates after shape filtering are
+ ((B-) [B-] (B+) [B+])
+The selection is
+ (B-)
+MARK: I select (B-) for you to place on the board.
+On which cell will you place (B-), BOB? (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1
+< (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2 A3 A4) A1
+
+BOB: Placing piece (B-) on cell A1 ...
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   (B-) **** **** ****
+     1    2    3    4
+Current player = BOB
+Move 2
+(R-) [R-] (R+) [R+] (r-) [r-] (r+) [r+]
+[B-] (B+) [B+] (b-) [b-] (b+) [b+]
+Which piece, BOB? (small red)
+The available pieces are
+ ([B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after size filtering are
+ ((b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after color filtering are
+ ((r-) [r-] (r+) [r+])
+Candidates after style filtering are
+ ((r-) [r-] (r+) [r+])
+Candidates after shape filtering are
+ ((r-) [r-] (r+) [r+])
+The selection is
+ [r+]
+BOB: I select [r+] for you to place on the board.
+On which cell will you place [r+], MARK? (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A2
+<RK? (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A2 A3 A4) B2
+
+MARK: Placing piece [r+] on cell B2 ...
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** [r+] **** ****
+A   (B-) **** **** ****
+     1    2    3    4
+Current player = MARK
+Move 3
+(R-) [R-] (R+) [R+] (r-) [r-] (r+)
+[B-] (B+) [B+] (b-) [b-] (b+) [b+]
+Which piece, MARK? (hollow circle)
+The available pieces are
+ ([B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+))
+Candidates after size filtering are
+ ([B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+))
+Candidates after color filtering are
+ ([B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+))
+Candidates after style filtering are
+ ([B-] (R-) [R-] (b-) [b-] (r-) [r-])
+Candidates after shape filtering are
+ ((R-) (b-) (r-))
+The selection is
+ (R-)
+MARK: I select (R-) for you to place on the board.
+On which cell will you place (R-), BOB? (D1 D2 D3 D4 C1 C2 C3 C4 B1 B3 B4 A2 A3
+<, BOB? (D1 D2 D3 D4 C1 C2 C3 C4 B1 B3 B4 A2 A3 A4) D2
+
+BOB: Placing piece (R-) on cell D2 ...
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** (R-) **** ****
+C   **** **** **** ****
+B   **** [r+] **** ****
+A   (B-) **** **** ****
+     1    2    3    4
+Current player = BOB
+Move 4
+[R-] (R+) [R+] (r-) [r-] (r+)
+[B-] (B+) [B+] (b-) [b-] (b+) [b+]
+Which piece, BOB? (solid square)
+The available pieces are
+ ([B-] (B+) [B+] [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+))
+Candidates after size filtering are
+ ([B-] (B+) [B+] [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+))
+Candidates after color filtering are
+ ([B-] (B+) [B+] [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+))
+Candidates after style filtering are
+ ((B+) [B+] (R+) [R+] (b+) [b+] (r+))
+Candidates after shape filtering are
+ ([B+] [R+] [b+])
+The selection is
+ [B+]
+BOB: I select [B+] for you to place on the board.
+On which cell will you place [B+], MARK? (D1 D3 D4 C1 C2 C3 C4 B1 B3 B4 A2 A3 A4
+<+], MARK? (D1 D3 D4 C1 C2 C3 C4 B1 B3 B4 A2 A3 A4) A3
+
+MARK: Placing piece [B+] on cell A3 ...
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** (R-) **** ****
+C   **** **** **** ****
+B   **** [r+] **** ****
+A   (B-) **** [B+] ****
+     1    2    3    4
+Current player = MARK
+NIL
+[15]> (task97--wind-up-game-demo)
+Name of player 1? mark
+Name of player 2? bob
+Who will move first, MARK or BOB? bob
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+Current player = BOB
+Congratulations, BOB!
+NIL
+[16]> (task98--play-demo
+)
+Name of player 1? Mark
+Name of player 2? bob
+Who will move first, MARK or BOB? mark
+
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+
+(R-) [R-] (R+) [R+] (r-) [r-] (r+) [r+]
+(B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+]
+Which piece, MARK? (big blue hollow circle)
+The available pieces are
+
+((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+)
+ [r+])
+Candidates after size filtering are
+ ((B-) [B-] (B+) [B+] (R-) [R-] (R+) [R+])
+Candidates after color filtering are
+ ((B-) [B-] (B+) [B+])
+Candidates after style filtering are
+ ((B-) [B-])
+Candidates after shape filtering are
+ ((B-))
+The selection is
+ (B-)
+MARK: I select (B-) for you to place on the board.
+On which cell will you place (B-), BOB? (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1
+< (D1 D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2 A3 A4) D1
+
+BOB: Placing piece (B-) on cell D1 ...
+
+D   (B-) **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+
+(R-) [R-] (R+) [R+] (r-) [r-] (r+) [r+]
+[B-] (B+) [B+] (b-) [b-] (b+) [b+]
+Which piece, BOB? (big blue)
+The available pieces are
+ ([B-] (B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after size filtering are
+ ([B-] (B+) [B+] (R-) [R-] (R+) [R+])
+Candidates after color filtering are
+ ([B-] (B+) [B+])
+Candidates after style filtering are
+ ([B-] (B+) [B+])
+Candidates after shape filtering are
+ ([B-] (B+) [B+])
+The selection is
+ [B-]
+BOB: I select [B-] for you to place on the board.
+On which cell will you place [B-], MARK? (D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2
+<RK? (D2 D3 D4 C1 C2 C3 C4 B1 B2 B3 B4 A1 A2 A3 A4) C2
+
+MARK: Placing piece [B-] on cell C2 ...
+
+D   (B-) **** **** ****
+C   **** [B-] **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+
+(R-) [R-] (R+) [R+] (r-) [r-] (r+) [r+]
+(B+) [B+] (b-) [b-] (b+) [b+]
+Which piece, MARK? (blue)
+The available pieces are
+ ((B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after size filtering are
+ ((B+) [B+] (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after color filtering are
+ ((B+) [B+] (b-) [b-] (b+) [b+])
+Candidates after style filtering are
+ ((B+) [B+] (b-) [b-] (b+) [b+])
+Candidates after shape filtering are
+ ((B+) [B+] (b-) [b-] (b+) [b+])
+The selection is
+ [B+]
+MARK: I select [B+] for you to place on the board.
+On which cell will you place [B+], BOB? (D2 D3 D4 C1 C3 C4 B1 B2 B3 B4 A1 A2 A3
+<, BOB? (D2 D3 D4 C1 C3 C4 B1 B2 B3 B4 A1 A2 A3 A4) B3
+
+BOB: Placing piece [B+] on cell B3 ...
+
+D   (B-) **** **** ****
+C   **** [B-] **** ****
+B   **** **** [B+] ****
+A   **** **** **** ****
+     1    2    3    4
+
+(R-) [R-] (R+) [R+] (r-) [r-] (r+) [r+]
+(B+) (b-) [b-] (b+) [b+]
+Which piece, BOB? (blue)
+The available pieces are
+ ((B+) (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after size filtering are
+ ((B+) (R-) [R-] (R+) [R+] (b-) [b-] (b+) [b+] (r-) [r-] (r+) [r+])
+Candidates after color filtering are
+ ((B+) (b-) [b-] (b+) [b+])
+Candidates after style filtering are
+ ((B+) (b-) [b-] (b+) [b+])
+Candidates after shape filtering are
+ ((B+) (b-) [b-] (b+) [b+])
+The selection is
+ [b+]
+BOB: I select [b+] for you to place on the board.
+On which cell will you place [b+], MARK? (D2 D3 D4 C1 C3 C4 B1 B2 B4 A1 A2 A3 A4
+<+], MARK? (D2 D3 D4 C1 C3 C4 B1 B2 B4 A1 A2 A3 A4) A4
+
+MARK: Placing piece [b+] on cell A4 ...
+
+D   (B-) **** **** ****
+C   **** [B-] **** ****
+B   **** **** [B+] ****
+A   **** **** **** [b+]
+     1    2    3    4
+
+Congratulations, MARK!
+NIL
+[17]>

@@ -1,0 +1,26 @@
+; accumulator.lsp
+;
+; Mark Willson
+; 10-14-12
+;
+; accumulator - a class that models an accumulator that keeps a count
+
+; class definition for accumulator
+
+(defclass accumulator()
+  (
+    (value :accessor accumulator-value :initarg :value :initform 0)
+  )
+)
+
+; inc - method which increments the accumulator
+
+(defmethod inc ((a accumulator) (i integer))
+  (setf (accumulator-value a) (+ (accumulator-value a) i))
+)
+
+; reset - method which resets the accumulator's value to 0
+
+(defmethod reset ((a accumulator))
+  (setf (accumulator-value a) 0)
+)

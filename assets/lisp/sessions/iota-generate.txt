@@ -1,0 +1,89 @@
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "lp.lsp")
+;; Loading file lp.lsp ...
+;; Loaded file lp.lsp
+T
+[2]> (trace iota generate)
+;; Tracing function IOTA.
+;; Tracing function GENERATE.
+(IOTA GENERATE)
+[3]> (iota 1)
+1. Trace: (IOTA '1)
+2. Trace: (IOTA '0)
+2. Trace: IOTA ==> NIL
+1. Trace: IOTA ==> (1)
+(1)
+[4]> (iota 10)
+1. Trace: (IOTA '10)
+2. Trace: (IOTA '9)
+3. Trace: (IOTA '8)
+4. Trace: (IOTA '7)
+5. Trace: (IOTA '6)
+6. Trace: (IOTA '5)
+7. Trace: (IOTA '4)
+8. Trace: (IOTA '3)
+9. Trace: (IOTA '2)
+10. Trace: (IOTA '1)
+11. Trace: (IOTA '0)
+11. Trace: IOTA ==> NIL
+10. Trace: IOTA ==> (1)
+9. Trace: IOTA ==> (1 2)
+8. Trace: IOTA ==> (1 2 3)
+7. Trace: IOTA ==> (1 2 3 4)
+6. Trace: IOTA ==> (1 2 3 4 5)
+5. Trace: IOTA ==> (1 2 3 4 5 6)
+4. Trace: IOTA ==> (1 2 3 4 5 6 7)
+3. Trace: IOTA ==> (1 2 3 4 5 6 7 8)
+2. Trace: IOTA ==> (1 2 3 4 5 6 7 8 9)
+1. Trace: IOTA ==> (1 2 3 4 5 6 7 8 9 10)
+(1 2 3 4 5 6 7 8 9 10)
+[5]> (generate 3 'peach)
+1. Trace: (GENERATE '3 'PEACH)
+2. Trace: (GENERATE '2 'PEACH)
+3. Trace: (GENERATE '1 'PEACH)
+4. Trace: (GENERATE '0 'PEACH)
+4. Trace: GENERATE ==> NIL
+3. Trace: GENERATE ==> (PEACH)
+2. Trace: GENERATE ==> (PEACH PEACH)
+1. Trace: GENERATE ==> (PEACH PEACH PEACH)
+(PEACH PEACH PEACH)
+[6]> (generate 9 '9)
+1. Trace: (GENERATE '9 '9)
+2. Trace: (GENERATE '8 '9)
+3. Trace: (GENERATE '7 '9)
+4. Trace: (GENERATE '6 '9)
+5. Trace: (GENERATE '5 '9)
+6. Trace: (GENERATE '4 '9)
+7. Trace: (GENERATE '3 '9)
+8. Trace: (GENERATE '2 '9)
+9. Trace: (GENERATE '1 '9)
+10. Trace: (GENERATE '0 '9)
+10. Trace: GENERATE ==> NIL
+9. Trace: GENERATE ==> (9)
+8. Trace: GENERATE ==> (9 9)
+7. Trace: GENERATE ==> (9 9 9)
+6. Trace: GENERATE ==> (9 9 9 9)
+5. Trace: GENERATE ==> (9 9 9 9 9)
+4. Trace: GENERATE ==> (9 9 9 9 9 9)
+3. Trace: GENERATE ==> (9 9 9 9 9 9 9)
+2. Trace: GENERATE ==> (9 9 9 9 9 9 9 9)
+1. Trace: GENERATE ==> (9 9 9 9 9 9 9 9 9)
+(9 9 9 9 9 9 9 9 9)
+[7]>

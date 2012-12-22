@@ -1,0 +1,138 @@
+; wizzard.lsp
+; 
+; An interactive world to be explored, which contains a few areas and some items which
+; can be picked up.
+;
+; Mark Willson
+; 11-6-12
+
+; main program code
+
+(setf (get 'living-room 'description) '((you are in the living-room)(a wizard is snoring loudly on the couch)))
+(setf (get 'garden 'description) '((you are in a beautiful garden)(there is a well in front of you)))
+(setf (get 'attic 'description) '((you are in the attic)(there is a giant welding torch in the corner)))
+
+(setf (get 'living-room 'paths) '((garden west door)(attic upstairs ladder)))
+(setf (get 'garden 'paths) '((living-room east door)))
+(setf (get 'attic 'paths) '((living-room downstairs ladder)))
+
+(setf (get 'living-room 'objects) '(whiskey bucket))
+(setf (get 'garden 'objects) '(frog chain))
+(setf (get 'attic 'objects) ())
+
+(setf *locations* '(living-room garden attic))
+
+(setf (get 'you 'location) (nth (random (list-length *locations*)) *locations*))
+(setf (get 'you 'objects) ())
+
+; pls - displays the property lists of all the locations
+
+(defun pls (lst)
+  (mapcar #'symbol-plist lst)
+)
+
+; dw - displays the state of the world
+
+(defun dw ()
+  (write-line "LIVING ROOM")
+  (prin1 (symbol-plist 'living-room))(terpri)(terpri)
+  (write-line "GARDEN")
+  (prin1 (symbol-plist 'garden))(terpri)(terpri)
+  (write-line "ATTIC")
+  (prin1 (symbol-plist 'attic))(terpri)(terpri)
+  (write-line "YOU")
+  (prin1 (symbol-plist 'you))(terpri)(terpri)
+  nil  
+)
+
+; describe-location - returns a list that describes a given location
+
+(defun describe-location (loc)
+  (get loc 'description)
+)
+
+; describe-paths-from - returns a list that describes each of the paths from a
+; given location
+
+(defun describe-paths-from (loc)
+  (setf things (mapcar #'caddr (get loc 'paths)))
+  (setf wheres (mapcar #'cadr (get loc 'paths)))
+  (mapcar 
+    #'(lambda (thing where)`(there is a ,thing going ,where from here))
+    things
+	wheres
+  )
+)
+
+; describe-objects-in - returns a list that describes the objects on the floor 
+; in a given location
+
+(defun describe-objects-in (loc)
+  (mapcar
+    #'(lambda (obj) `(you see a ,obj on the floor))
+	(get loc 'objects)
+  )
+)
+
+; look - provides a complete summary of the room you are currently in
+
+(defun look ()
+  (mapcar #'print (describe-location (get 'you 'location)))
+  (mapcar #'print (describe-paths-from (get 'you 'location)))
+  (mapcar #'print (describe-objects-in (get 'you 'location)))
+  nil
+)
+
+; pickup - takes an object from the current room and puts it in your inventory
+
+(defun pickup (obj &aux items)
+  (setf items (get (get 'you 'location) 'objects))
+  (cond
+    ((member obj items)
+	  (setf (get (get 'you 'location) 'objects) (remove obj items :count 1))
+      (setf (get 'you 'objects) (cons obj (get 'you 'objects)))
+	  nil
+	)
+	(t
+	  (format t "Cannot pick up ~A in location ~A ~%" obj (get 'you 'location))
+	  nil
+	)
+  )
+)
+
+; inventory - tells you what objects you are currently carrying
+
+(defun inventory ()
+  (format t "You are carrying ")
+  (cond
+    ((null (get 'you 'objects))
+	  (format t "nothing at all.")
+	  nil
+	)
+	(t
+	  (format t "the ~A " (car (get 'you 'objects)))
+	  (mapcar 
+	    #'(lambda (obj) (format t "and the ~A " obj))
+		(cdr (get 'you 'objects))
+	  )
+	  nil
+	)
+  )
+)
+
+; walk - walks to a different room given a direction
+
+(defun walk (dir &aux directs rooms)
+  (setf directs (mapcar #'cadr (get (get 'you 'location) 'paths)))
+  (setf rooms (mapcar #'car (get (get 'you 'location) 'paths)))
+  (mapcar #'(lambda (direct room) (setf (get direct 'loc) room)) directs rooms)
+  (cond
+    ((member dir directs)
+	  (setf (get 'you 'location) (get dir 'loc))
+	  nil
+	)
+	(t
+	  (format t "Sorry - you cannot move ~A from the ~A" dir (get 'you 'location))
+	)
+  )
+)

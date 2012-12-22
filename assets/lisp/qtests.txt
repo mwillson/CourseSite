@@ -1,0 +1,179 @@
+; qtests.lsp
+; 
+; Tests for the quarto game framework
+;
+; Mark Willson
+
+(load "quarto.lsp")
+
+(defmethod task2--piece-demo ()
+  (setf p (make-instance 'piece))
+  (format t "size=~A color=~A style=~A shape=~A~%" 
+    (piece-size p) 
+	(piece-color p) 
+	(piece-style p) 
+	(piece-shape p)
+  )
+  (setf q (make-instance 'piece :size 'big :style 'solid :shape 'square))
+  (format t "size=~A color=~A style=~A shape=~A~%" 
+    (piece-size q) 
+	(piece-color q) 
+	(piece-style q) 
+	(piece-shape q)
+  )
+  nil
+)
+
+(defmethod task4--display-piece-demo ()
+  (setf p (make-instance 'piece))
+  (setf q (make-instance 'piece :size 'big :style 'solid :shape 'square))
+  (display p)
+  (display q)
+  nil
+)
+
+(defmethod task6--establish-pieces-demo ()
+  (establish-pieces)
+  (mapcar #'display *pieces*)
+  nil
+)
+
+(defmethod task8--print-rep-demo ()
+  (establish-pieces)
+  (format t "*BBHS* ~A~%" (get 'print-rep *bbhs*))
+  (format t "*SRSC* ~A~%" (get 'print-rep *srsc*))
+  nil
+)
+
+(defmethod task10--to-string-demo ()
+  (establish-pieces)
+  (format t "~A~%" (write-to-string (mapcar #'to-string *pieces*)))
+  (format t "*BBHS* ~A~%" (to-string *bbhs*))
+  (format t "*SRSC* ~A~%" (to-string *srsc*))
+  nil
+)
+
+(defmethod task13--to-string-demo ()
+  (format t "~A~%" (to-string '(coffee tea)))
+  (format t "~A~%" (to-string '("[B+]" "(b-)" "(R+)")))
+  nil
+)
+
+(defmethod task15--color-predicates-demo ()
+  (setf p (make-instance 'piece))
+  (setf q (make-instance 'piece :color 'red))
+  (format t "P is red: ~A~%" (is-red-p p))
+  (format t "Q is red: ~A~%" (is-red-p q))
+  (format t "P is blue: ~A~%" (is-blue-p p))
+  (format t "Q is blue: ~A~%" (is-blue-p q))
+  nil
+)
+
+(defmethod task17--display-available-pieces-demo ()
+  (establish-pieces)
+  (setf *avail* (copy-tree *pieces*))
+  (mapcar #'display *avail*)
+  (display-available-pieces)
+  nil
+)
+
+(defmethod populate-with-animals ((b board))
+  (setf (board-a1 b) 'cat)
+  (setf (board-a2 b) 'dog)
+  (setf (board-a3 b) 'cow)
+  (setf (board-b1 b) 'bat)
+  (setf (board-b2 b) 'ape)
+  (setf (board-b3 b) 'auk)
+  (setf (board-b4 b) 'yak)
+  (setf (board-c2 b) 'emu)
+  (setf (board-c3 b) 'fox)
+  (setf (board-c4 b) 'owl)
+  (setf (board-d1 b) 'pig)
+  (setf (board-d3 b) 'rat)
+)
+
+(defmethod task19--board-demo ()
+  (setf *board* (make-instance 'board))
+  (format t "Initial board ...~%")
+  (display-board-objects *board*)
+  (populate-with-animals *board*)
+  (format t "Animal playground ...~%")
+  (display-board-objects *board*)
+  nil
+)
+
+(defmethod task21--board-row-demo ()
+  (setf *board* (make-instance 'board))
+  (populate-with-animals *board*)
+  (format t "Animal playground ...~%")
+  (display-board-objects *board*)
+  (format t "Row d = ~A~%" (board-row 'd *board*))
+  (format t "Row c = ~A~%" (board-row 'c *board*))
+  (format t "Row b = ~A~%" (board-row 'b *board*))
+  (format t "Row a = ~A~%" (board-row 'a *board*))
+  nil
+)
+
+(defmethod task23--board-col-demo ()
+  (setf *board* (make-instance 'board))
+  (populate-with-animals *board*)
+  (format t "Animal playground ...~%")
+  (display-board-objects *board*)
+  (format t "Col 1 = ~A~%" (board-col 1 *board*))
+  (format t "Col 2 = ~A~%" (board-col 2 *board*))
+  (format t "Col 3 = ~A~%" (board-col 3 *board*))
+  (format t "Col 4 = ~A~%" (board-col 4 *board*))
+  nil
+)
+
+(defmethod task25--board-diagonal-demo ()
+  (setf *board* (make-instance 'board))
+  (populate-with-animals *board*)
+  (format t "Animal playground ...~%")
+  (display-board-objects *board*)
+  (format t "Major Diagonal = ~A~%" (board-diagonal 'major *board*))
+  (format t "Minor Diagonal = ~A~%" (board-diagonal 'minor *board*))
+  nil
+)
+
+(defmethod populate-with-pieces ((b board))
+  (setf (board-a1 b) *bbhs*)
+  (setf (board-a2 b) *bbss*)
+  (setf (board-a3 b) *sbhs*)
+  (setf (board-b1 b) *sbss*)
+  (setf (board-b2 b) *brhs*)
+  (setf (board-b3 b) *brss*)
+  (setf (board-b4 b) *srhs*)
+  (setf (board-c2 b) *srss*)
+  (setf (board-c3 b) *bbhc*)
+  (setf (board-c4 b) *bbsc*)
+  (setf (board-d1 b) *srhc*)
+  (setf (board-d3 b) *srsc*)
+  nil
+)
+
+(defmethod task27--display-board-demo ()
+  (setf board (make-instance 'board))
+  (format t "Initial board ...~%")
+  (display board)
+  (populate-with-animals *board*)
+  (format t "Animal playground ...~%")
+  (display board)
+  (setf board (make-instance 'board))
+  (format t "Initial board ...~%")
+  (display board)
+  (establish-pieces)
+  (populate-with-pieces board)
+  (format t "Quarto playground ... ~%")
+  (display board)
+  nil
+)
+
+(defmethod task29--player-demo ()
+  (setf p (make-instance 'player :name 'Hobbit))
+  (display p)
+  (setf q (make-instance 'human-player :name 'Harry))
+  (display q)
+  nil
+)
+

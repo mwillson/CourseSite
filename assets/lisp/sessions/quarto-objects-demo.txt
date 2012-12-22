@@ -1,0 +1,162 @@
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "qtests.lsp")
+;; Loading file qtests.lsp ...
+;;  Loading file quarto.lsp ...
+;;   Loading file lp.lsp ...
+;;   Loaded file lp.lsp
+;;  Loaded file quarto.lsp
+;; Loaded file qtests.lsp
+T
+[2]> (task2--piece-demo)
+size=SMALL color=BLUE style=HOLLOW shape=CIRCLE
+size=BIG color=BLUE style=SOLID shape=SQUARE
+NIL
+[3]> (task4--display-piece-demo)
+piece: size=SMALL color=BLUE style=HOLLOW shape=CIRCLE
+piece: size=BIG color=BLUE style=SOLID shape=SQUARE
+NIL
+[4]> (task6--establish-pieces-demo)
+piece: size=BIG color=BLUE style=HOLLOW shape=CIRCLE
+piece: size=BIG color=BLUE style=HOLLOW shape=SQUARE
+piece: size=BIG color=BLUE style=SOLID shape=CIRCLE
+piece: size=BIG color=BLUE style=SOLID shape=SQUARE
+piece: size=BIG color=RED style=HOLLOW shape=CIRCLE
+piece: size=BIG color=RED style=HOLLOW shape=SQUARE
+piece: size=BIG color=RED style=SOLID shape=CIRCLE
+piece: size=BIG color=RED style=SOLID shape=SQUARE
+piece: size=SMALL color=BLUE style=HOLLOW shape=CIRCLE
+piece: size=SMALL color=BLUE style=HOLLOW shape=SQUARE
+piece: size=SMALL color=BLUE style=SOLID shape=CIRCLE
+piece: size=SMALL color=BLUE style=SOLID shape=SQUARE
+piece: size=SMALL color=RED style=HOLLOW shape=CIRCLE
+piece: size=SMALL color=RED style=HOLLOW shape=SQUARE
+piece: size=SMALL color=RED style=SOLID shape=CIRCLE
+piece: size=SMALL color=RED style=SOLID shape=SQUARE
+NIL
+[5]> (task8--print-rep-demo)
+*BBHS* [B-]
+*SRSC* (r+)
+NIL
+[6]> (task10--to-string-demo)
+("(B-)" "[B-]" "(B+)" "[B+]" "(R-)" "[R-]" "(R+)" "[R+]" "(b-)" "[b-]" "(b+)"
+ "[b+]" "(r-)" "[r-]" "(r+)" "[r+]")
+*BBHS* [B-]
+*SRSC* (r+)
+NIL
+[7]> (task13--to-string-demo)
+COFFEE TEA
+[B+] (b-) (R+)
+NIL
+[8]> (task15--color-predicates-demo)
+P is red: NIL
+Q is red: T
+P is blue: T
+Q is blue: NIL
+NIL
+[9]> (task17--display-available-pieces-demo)
+piece: size=BIG color=BLUE style=HOLLOW shape=CIRCLE
+piece: size=BIG color=BLUE style=HOLLOW shape=SQUARE
+piece: size=BIG color=BLUE style=SOLID shape=CIRCLE
+piece: size=BIG color=BLUE style=SOLID shape=SQUARE
+piece: size=BIG color=RED style=HOLLOW shape=CIRCLE
+piece: size=BIG color=RED style=HOLLOW shape=SQUARE
+piece: size=BIG color=RED style=SOLID shape=CIRCLE
+piece: size=BIG color=RED style=SOLID shape=SQUARE
+piece: size=SMALL color=BLUE style=HOLLOW shape=CIRCLE
+piece: size=SMALL color=BLUE style=HOLLOW shape=SQUARE
+piece: size=SMALL color=BLUE style=SOLID shape=CIRCLE
+piece: size=SMALL color=BLUE style=SOLID shape=SQUARE
+piece: size=SMALL color=RED style=HOLLOW shape=CIRCLE
+piece: size=SMALL color=RED style=HOLLOW shape=SQUARE
+piece: size=SMALL color=RED style=SOLID shape=CIRCLE
+piece: size=SMALL color=RED style=SOLID shape=SQUARE
+(R-) [R-] (R+) [R+] (r-) [r-] (r+) [r+]
+(B-) [B-] (B+) [B+] (b-) [b-] (b+) [b+]
+NIL
+[10]> (task19--board-demo)
+Initial board ...
+d1=NIL d2=NIL d3=NIL d4=NIL
+c1=NIL c2=NIL c3=NIL c4=NIL
+b1=NIL b2=NIL b3=NIL b4=NIL
+a1=NIL a2=NIL a3=NIL a4=NIL
+Animal playground ...
+d1=PIG d2=NIL d3=RAT d4=NIL
+c1=NIL c2=EMU c3=FOX c4=OWL
+b1=BAT b2=APE b3=AUK b4=YAK
+a1=CAT a2=DOG a3=COW a4=NIL
+NIL
+[11]> (task21--board-row-demo)
+Animal playground ...
+d1=PIG d2=NIL d3=RAT d4=NIL
+c1=NIL c2=EMU c3=FOX c4=OWL
+b1=BAT b2=APE b3=AUK b4=YAK
+a1=CAT a2=DOG a3=COW a4=NIL
+Row d = (PIG NIL RAT NIL)
+Row c = (NIL EMU FOX OWL)
+Row b = (BAT APE AUK YAK)
+Row a = (CAT DOG COW NIL)
+NIL
+[12]> (task23--board-col-demo)
+Animal playground ...
+d1=PIG d2=NIL d3=RAT d4=NIL
+c1=NIL c2=EMU c3=FOX c4=OWL
+b1=BAT b2=APE b3=AUK b4=YAK
+a1=CAT a2=DOG a3=COW a4=NIL
+Col 1 = (PIG NIL BAT CAT)
+Col 2 = (NIL EMU APE DOG)
+Col 3 = (RAT FOX AUK COW)
+Col 4 = (NIL OWL YAK NIL)
+NIL
+[13]> (task25--board-diagonal-demo)
+Animal playground ...
+d1=PIG d2=NIL d3=RAT d4=NIL
+c1=NIL c2=EMU c3=FOX c4=OWL
+b1=BAT b2=APE b3=AUK b4=YAK
+a1=CAT a2=DOG a3=COW a4=NIL
+Major Diagonal = (CAT APE FOX NIL)
+Minor Diagonal = (PIG EMU AUK NIL)
+NIL
+[14]> (task27--display-board-demo)
+Initial board ...
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+Animal playground ...
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+Initial board ...
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+Quarto playground ...
+D   (r-) **** (r+) ****
+C   **** [r+] (B-) (B+)
+B   [b+] [R-] [R+] [r-]
+A   [B-] [B+] [b-] ****
+     1    2    3    4
+NIL
+[15]>

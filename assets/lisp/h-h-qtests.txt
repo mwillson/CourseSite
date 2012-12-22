@@ -1,0 +1,929 @@
+; qtests.lsp
+; 
+; Tests for the quarto game framework
+;
+; Mark Willson
+
+(load "quarto.lsp")
+
+(defmethod task2--piece-demo ()
+  (setf p (make-instance 'piece))
+  (format t "size=~A color=~A style=~A shape=~A~%" 
+    (piece-size p) 
+	(piece-color p) 
+	(piece-style p) 
+	(piece-shape p)
+  )
+  (setf q (make-instance 'piece :size 'big :style 'solid :shape 'square))
+  (format t "size=~A color=~A style=~A shape=~A~%" 
+    (piece-size q) 
+	(piece-color q) 
+	(piece-style q) 
+	(piece-shape q)
+  )
+  nil
+)
+
+(defmethod task4--display-piece-demo ()
+  (setf p (make-instance 'piece))
+  (setf q (make-instance 'piece :size 'big :style 'solid :shape 'square))
+  (display p)
+  (display q)
+  nil
+)
+
+(defmethod task6--establish-pieces-demo ()
+  (establish-pieces)
+  (mapcar #'display *pieces*)
+  nil
+)
+
+(defmethod task8--print-rep-demo ()
+  (establish-pieces)
+  (format t "*BBHS* ~A~%" (get 'print-rep *bbhs*))
+  (format t "*SRSC* ~A~%" (get 'print-rep *srsc*))
+  nil
+)
+
+(defmethod task10--to-string-demo ()
+  (establish-pieces)
+  (format t "~A~%" (write-to-string (mapcar #'to-string *pieces*)))
+  (format t "*BBHS* ~A~%" (to-string *bbhs*))
+  (format t "*SRSC* ~A~%" (to-string *srsc*))
+  nil
+)
+
+(defmethod task13--to-string-demo ()
+  (format t "~A~%" (to-string '(coffee tea)))
+  (format t "~A~%" (to-string '("[B+]" "(b-)" "(R+)")))
+  nil
+)
+
+(defmethod task15--color-predicates-demo ()
+  (setf p (make-instance 'piece))
+  (setf q (make-instance 'piece :color 'red))
+  (format t "P is red: ~A~%" (is-red-p p))
+  (format t "Q is red: ~A~%" (is-red-p q))
+  (format t "P is blue: ~A~%" (is-blue-p p))
+  (format t "Q is blue: ~A~%" (is-blue-p q))
+  nil
+)
+
+(defmethod task17--display-available-pieces-demo ()
+  (establish-pieces)
+  (setf *avail* (copy-tree *pieces*))
+  (mapcar #'display *avail*)
+  (display-available-pieces)
+  nil
+)
+
+(defmethod populate-with-animals ((b board))
+  (setf (board-a1 b) 'cat)
+  (setf (board-a2 b) 'dog)
+  (setf (board-a3 b) 'cow)
+  (setf (board-b1 b) 'bat)
+  (setf (board-b2 b) 'ape)
+  (setf (board-b3 b) 'auk)
+  (setf (board-b4 b) 'yak)
+  (setf (board-c2 b) 'emu)
+  (setf (board-c3 b) 'fox)
+  (setf (board-c4 b) 'owl)
+  (setf (board-d1 b) 'pig)
+  (setf (board-d3 b) 'rat)
+)
+
+(defmethod task19--board-demo ()
+  (setf *board* (make-instance 'board))
+  (format t "Initial board ...~%")
+  (display-board-objects *board*)
+  (populate-with-animals *board*)
+  (format t "Animal playground ...~%")
+  (display-board-objects *board*)
+  nil
+)
+
+(defmethod task21--board-row-demo ()
+  (setf *board* (make-instance 'board))
+  (populate-with-animals *board*)
+  (format t "Animal playground ...~%")
+  (display-board-objects *board*)
+  (format t "Row d = ~A~%" (board-row 'd *board*))
+  (format t "Row c = ~A~%" (board-row 'c *board*))
+  (format t "Row b = ~A~%" (board-row 'b *board*))
+  (format t "Row a = ~A~%" (board-row 'a *board*))
+  nil
+)
+
+(defmethod task23--board-col-demo ()
+  (setf *board* (make-instance 'board))
+  (populate-with-animals *board*)
+  (format t "Animal playground ...~%")
+  (display-board-objects *board*)
+  (format t "Col 1 = ~A~%" (board-col 1 *board*))
+  (format t "Col 2 = ~A~%" (board-col 2 *board*))
+  (format t "Col 3 = ~A~%" (board-col 3 *board*))
+  (format t "Col 4 = ~A~%" (board-col 4 *board*))
+  nil
+)
+
+(defmethod task25--board-diagonal-demo ()
+  (setf *board* (make-instance 'board))
+  (populate-with-animals *board*)
+  (format t "Animal playground ...~%")
+  (display-board-objects *board*)
+  (format t "Major Diagonal = ~A~%" (board-diagonal 'major *board*))
+  (format t "Minor Diagonal = ~A~%" (board-diagonal 'minor *board*))
+  nil
+)
+
+(defmethod populate-with-pieces ((b board))
+  (setf (board-a1 b) *bbhs*)
+  (setf (board-a2 b) *bbss*)
+  (setf (board-a3 b) *sbhs*)
+  (setf (board-b1 b) *sbss*)
+  (setf (board-b2 b) *brhs*)
+  (setf (board-b3 b) *brss*)
+  (setf (board-b4 b) *srhs*)
+  (setf (board-c2 b) *srss*)
+  (setf (board-c3 b) *bbhc*)
+  (setf (board-c4 b) *bbsc*)
+  (setf (board-d1 b) *srhc*)
+  (setf (board-d3 b) *srsc*)
+  nil
+)
+
+(defmethod task27--display-board-demo ()
+  (setf board (make-instance 'board))
+  (format t "Initial board ...~%")
+  (display board)
+  (populate-with-animals *board*)
+  (format t "Animal playground ...~%")
+  (display board)
+  (setf board (make-instance 'board))
+  (format t "Initial board ...~%")
+  (display board)
+  (establish-pieces)
+  (populate-with-pieces board)
+  (format t "Quarto playground ... ~%")
+  (display board)
+  nil
+)
+
+(defmethod task29--player-demo ()
+  (setf p (make-instance 'player :name 'Hobbit))
+  (display p)
+  (setf q (make-instance 'human-player :name 'Harry))
+  (display q)
+  nil
+)
+
+(defmethod task31--state-demo ()
+  (setf p1 (make-instance 'player :name 'DeMarkus))
+  (setf st (make-instance 'state :player p1))
+  (display st)
+)
+
+(defmethod task33--game-demo ()
+  (setf p (make-instance 'player :name 'one))
+  (setf q (make-instance 'player :name 'two))
+  (setf s (make-instance 'state :player p))
+  (setf g (make-instance 'game :state s :player1 p :player2 q))
+  (display g)
+  nil
+)
+
+(defmethod task35--h-h-game-demo ()
+  (display (h-h-game))
+  nil
+)
+
+(defmethod task39--same-size-p-demo ()
+  (establish-pieces)
+  (format t "For ~A and ~A the same size result = ~A~%"
+    (to-string *bbhs*) (to-string *brhs*) (same-size-p *bbhs* *brhs*)
+  )
+  (format t "For ~A and ~A the same size result = ~A~%"
+    (to-string *sbhs*) (to-string *srhs*) (same-size-p *sbhs* *srhs*)
+  )
+  (format t "For ~A and ~A the same size result = ~A~%"
+    (to-string *bbhs*) (to-string *srhs*) (same-size-p *bbhs* *srhs*)
+  )
+  (format t "For ~A and ~A the same size result = ~A~%"
+    (to-string *sbhs*) (to-string *brhs*) (same-size-p *sbhs* *brhs*)
+  )
+  nil
+)
+
+(defmethod task41--same-color-p-demo ()
+  (establish-pieces)
+  (format t "For ~A and ~A the same color result = ~A~%"
+    (to-string *bbhs*) (to-string *sbhs*) (same-color-p *bbhs* *sbhs*)
+  )
+  (format t "For ~A and ~A the same color result = ~A~%"
+    (to-string *bbhs*) (to-string *bbss*) (same-color-p *bbhs* *bbss*)
+  )
+  (format t "For ~A and ~A the same color result = ~A~%"
+    (to-string *bbhs*) (to-string *srhs*) (same-color-p *bbhs* *srhs*)
+  )
+  (format t "For ~A and ~A the same color result = ~A~%"
+    (to-string *sbhs*) (to-string *brhs*) (same-color-p *sbhs* *brhs*)
+  )
+  nil
+)
+
+(defmethod task43--same-style-p-demo ()
+  (establish-pieces)
+  (format t "For ~A and ~A the same style result = ~A~%"
+    (to-string *bbhs*) (to-string *brhs*) (same-style-p *bbhs* *brhs*)
+  )
+  (format t "For ~A and ~A the same style result = ~A~%"
+    (to-string *sbss*) (to-string *srss*) (same-style-p *sbss* *srss*)
+  )
+  (format t "For ~A and ~A the same style result = ~A~%"
+    (to-string *bbhs*) (to-string *srss*) (same-style-p *bbhs* *srss*)
+  )
+  (format t "For ~A and ~A the same style result = ~A~%"
+    (to-string *sbss*) (to-string *brhs*) (same-style-p *sbss* *brhs*)
+  )
+  nil
+)
+
+(defmethod task45--same-shape-p-demo ()
+  (establish-pieces)
+  (format t "For ~A and ~A the same shape result = ~A~%"
+    (to-string *bbhs*) (to-string *brhs*) (same-shape-p *bbhs* *brhs*)
+  )
+  (format t "For ~A and ~A the same shape result = ~A~%"
+    (to-string *sbhc*) (to-string *srhc*) (same-shape-p *sbhc* *srhc*)
+  )
+  (format t "For ~A and ~A the same shape result = ~A~%"
+    (to-string *bbhs*) (to-string *srhc*) (same-shape-p *bbhs* *srhc*)
+  )
+  (format t "For ~A and ~A the same shape result = ~A~%"
+    (to-string *sbhc*) (to-string *brhs*) (same-shape-p *sbhc* *brhs*)
+  )
+  nil
+)
+
+(defmethod task47--uniform-p-demo ()
+  (setf sal1 '(this this this this this))
+  (format t "~A is uniform? ~A~%" sal1 (uniform-p sal1))
+  (setf sal2 '(this that the other))
+  (format t "~A is uniform? ~A~%" sal2 (uniform-p sal2))
+  nil
+)
+
+(defmethod task49--uniform-size-p-demo (&aux pl1 pl2 pl3)
+  (establish-pieces)
+  (setf pl1 (list *bbhc* *brss* *brss* *brhc*))
+  (format t "~A is uniform in size? ~A~%" 
+    (mapcar #'to-string pl1) (uniform-size-p pl1)
+  )
+  (setf pl2 (list *sbhc* *srss* *srss* *srhc*))
+  (format t "~A is uniform in size? ~A~%" 
+    (mapcar #'to-string pl2) (uniform-size-p pl2)
+  )
+  (setf pl3 (list *bbhc* *brss* *srss* *brhc*))
+  (format t "~A is uniform in size? ~A~%" 
+    (mapcar #'to-string pl3) (uniform-size-p pl3)
+  )
+  nil
+)
+
+(defmethod task51--uniform-color-p-demo (&aux pl1 pl2 pl3)
+  (establish-pieces)
+  (setf pl1 (list *bbhc* *sbss* *bbss* *sbhc*))
+  (format t "~A is uniform in color? ~A~%" 
+    (mapcar #'to-string pl1) (uniform-color-p pl1)
+  )
+  (setf pl2 (list *brhc* *srss* *brss* *srhc*))
+  (format t "~A is uniform in color? ~A~%" 
+    (mapcar #'to-string pl2) (uniform-color-p pl2)
+  )
+  (setf pl3 (list *bbhc* *brss* *srss* *brhc*))
+  (format t "~A is uniform in color? ~A~%" 
+    (mapcar #'to-string pl3) (uniform-color-p pl3)
+  )
+  nil
+)
+
+(defmethod task53--uniform-style-p-demo (&aux pl1 pl2 pl3)
+  (establish-pieces)
+  (setf pl1 (list *bbsc* *brss* *brss* *brsc*))
+  (format t "~A is uniform in style? ~A~%" 
+    (mapcar #'to-string pl1) (uniform-style-p pl1)
+  )
+  (setf pl2 (list *sbhc* *srhs* *srhs* *srhc*))
+  (format t "~A is uniform in style? ~A~%" 
+    (mapcar #'to-string pl2) (uniform-style-p pl2)
+  )
+  (setf pl3 (list *bbhc* *brss* *srss* *brhc*))
+  (format t "~A is uniform in style? ~A~%" 
+    (mapcar #'to-string pl3) (uniform-style-p pl3)
+  )
+  nil
+)
+
+(defmethod task55--uniform-shape-p-demo (&aux pl1 pl2 pl3)
+  (establish-pieces)
+  (setf pl1 (list *bbhs* *brss* *brss* *brhs*))
+  (format t "~A is uniform in shape? ~A~%" 
+    (mapcar #'to-string pl1) (uniform-shape-p pl1)
+  )
+  (setf pl2 (list *sbhc* *srsc* *srsc* *srhc*))
+  (format t "~A is uniform in shape? ~A~%" 
+    (mapcar #'to-string pl2) (uniform-shape-p pl2)
+  )
+  (setf pl3 (list *bbhc* *brss* *srss* *brhc*))
+  (format t "~A is uniform in shape? ~A~%" 
+    (mapcar #'to-string pl3) (uniform-shape-p pl3)
+  )
+  nil
+)
+
+(defmethod task57--similar-pieces-p-demo (&aux set1 set2 set3 set4 set5)
+  (establish-pieces)
+  (setf set1 (list *bbsc* *brsc* *sbhc*)) ;all circles
+  (format t "The set ~A are similar? ~A~%" 
+    (mapcar #'to-string set1) (similar-pieces-p set1)
+  )
+  (setf set2 (list *bbsc* *brsc* *bbhs*)) ;all big
+  (format t "The set ~A are similar? ~A~%" 
+    (mapcar #'to-string set2) (similar-pieces-p set2)
+  )
+  (setf set3 (list *bbsc* *bbhs* *sbsc*)) ;all blue
+  (format t "The set ~A are similar? ~A~%" 
+    (mapcar #'to-string set3) (similar-pieces-p set3)
+  )  
+  (setf set4 (list *bbsc* *brss* *sbsc*)) ;all solid
+  (format t "The set ~A are similar? ~A~%" 
+    (mapcar #'to-string set4) (similar-pieces-p set4)
+  )
+  (setf set5 (list *bbsc* *brhc* *sbss*)) ;nothing
+  (format t "The set ~A are similar? ~A~%" 
+    (mapcar #'to-string set5) (similar-pieces-p set5)
+  )  
+  nil
+)
+
+(defmethod piece-or-nil ((pn t))
+  (cond
+    ((null pn)
+	  "NIL"
+	)
+	((eq (type-of pn) 'piece)
+	  (concatenate 'string (to-string pn))
+	)
+	(t
+	  "????"
+	)
+  )
+)
+
+(defmethod task59--four-similar-pieces-demo ()
+  (establish-pieces)
+  (setf line1 (list *bbss* *sbss* *brsc* *srsc*))
+  (format t "The line ~A consists of four similar pieces? ~A~%" 
+    (mapcar #'piece-or-nil line1) (four-similar-pieces line1)
+  )
+  (setf line2 (list *bbss* *sbss* nil *srss*))
+  (format t "The line ~A consists of four similar pieces? ~A~%" 
+    (mapcar #'piece-or-nil line2) (four-similar-pieces line2)
+  )
+  (setf line3 (list *bbss* *sbss* *brsc* *srhc*))
+  (format t "The line ~A consists of four similar pieces? ~A~%" 
+    (mapcar #'piece-or-nil line3) (four-similar-pieces line3)
+  )  
+  nil
+)
+
+(defmethod populate-with-pieces-row ((b board))
+  (setf (board-a1 b) *bbhs*)
+  (setf (board-a2 b) *bbss*)
+  (setf (board-a3 b) *sbhs*)
+  (setf (board-b1 b) *sbss*)
+  (setf (board-b2 b) *brhs*)
+  (setf (board-b3 b) *brss*)
+  (setf (board-b4 b) *srhs*)
+  (setf (board-c2 b) *srss*)
+  (setf (board-c3 b) *bbhc*)
+  (setf (board-c4 b) *bbsc*)
+  (setf (board-d1 b) *srhc*)
+  (setf (board-d3 b) *srhc*)
+  nil
+)
+
+(defmethod populate-with-pieces-nothing ((b board))
+  (setf (board-a1 b) *bbhs*)
+  (setf (board-a2 b) *bbss*)
+  (setf (board-a3 b) *sbhs*)
+  (setf (board-b1 b) *sbsc*)
+  (setf (board-b2 b) *brhs*)
+  (setf (board-b3 b) *brss*)
+  (setf (board-b4 b) *srhs*)
+  (setf (board-c2 b) *srss*)
+  (setf (board-c3 b) *bbhc*)
+  (setf (board-c4 b) *bbsc*)
+  (setf (board-d1 b) *srhc*)
+  (setf (board-d3 b) *srhc*)
+  (setf (board-d4 b) *sbsc*)
+  nil
+)
+
+(defmethod task61--four-in-a-row-demo (&aux board)
+  (establish-pieces)
+  (setf board (make-instance 'board))
+  (populate-with-pieces-row board)
+  (format t "Quarto board with four in a row...~%")
+  (display board)
+  (format t "Four in a row? ~A~%" (four-in-a-row board))
+  (setf board (make-instance 'board))
+  (populate-with-pieces-nothing board)
+  (format t "Quarto board with nothing...~%")
+  (display board)
+  (format t "Four in a row? ~A~%" (four-in-a-row board))
+  nil
+)
+
+(defmethod populate-with-pieces-col ((b board))
+  (setf (board-a1 b) *bbhs*)
+  (setf (board-a2 b) *bbss*)
+  (setf (board-a3 b) *sbhs*)
+  (setf (board-b1 b) *sbsc*)
+  (setf (board-b2 b) *brss*)
+  (setf (board-b3 b) *brhs*)
+  (setf (board-b4 b) *srhs*)
+  (setf (board-c2 b) *srss*)
+  (setf (board-c3 b) *bbhc*)
+  (setf (board-c4 b) *bbsc*)
+  (setf (board-d1 b) *srhc*)
+  (setf (board-d3 b) *srhc*)
+  nil
+)
+
+(defmethod task63--four-in-a-col-demo (&aux board)
+  (establish-pieces)
+  (setf board (make-instance 'board))
+  (populate-with-pieces-col board)
+  (format t "Quarto board with four in a column...~%")
+  (display board)
+  (format t "Four in a column? ~A~%" (four-in-a-col board))
+  (setf board (make-instance 'board))
+  (populate-with-pieces-nothing board)
+  (format t "Quarto board with nothing...~%")
+  (display board)
+  (format t "Four in a column? ~A~%" (four-in-a-col board))
+  nil
+)
+
+(defmethod populate-with-pieces-diag ((b board))
+  (setf (board-a1 b) *bbhs*)
+  (setf (board-a2 b) *bbss*)
+  (setf (board-a3 b) *sbhs*)
+  (setf (board-a4 b) *brsc*)
+  (setf (board-b1 b) *sbss*)
+  (setf (board-b2 b) *brhs*)
+  (setf (board-b3 b) *brss*)
+  (setf (board-b4 b) *srhs*)
+  (setf (board-c2 b) *srss*)
+  (setf (board-c3 b) *bbhc*)
+  (setf (board-c4 b) *bbsc*)
+  (setf (board-d1 b) *srhc*)
+  (setf (board-d3 b) *srhc*)
+  nil
+)
+
+(defmethod task65--four-in-a-diagonal-demo (&aux board)
+  (establish-pieces)
+  (setf board (make-instance 'board))
+  (populate-with-pieces-diag board)
+  (format t "Quarto board with four in a diagonal...~%")
+  (display board)
+  (format t "Four in a diagonal? ~A~%" (four-in-a-diagonal board))
+  (setf board (make-instance 'board))
+  (populate-with-pieces-nothing board)
+  (format t "Quarto board with nothing...~%")
+  (display board)
+  (format t "Four in a diagonal? ~A~%" (four-in-a-diagonal board))
+  nil
+)
+
+(defmethod populate-with-pieces-for-row-win ((b board))
+  (setf (board-a1 b) nil)
+  (setf (board-a2 b) nil)
+  (setf (board-a3 b) nil)
+  (setf (board-a4 b) nil)
+  (setf (board-b1 b) *brss*)
+  (setf (board-b2 b) *srhc*)
+  (setf (board-b3 b) *srss*)
+  (setf (board-b4 b) *brhc*)
+  (setf (board-c1 b) nil)
+  (setf (board-c2 b) nil)
+  (setf (board-c3 b) nil)
+  (setf (board-c4 b) nil)
+  (setf (board-d1 b) nil)
+  (setf (board-d2 b) nil)
+  (setf (board-d3 b) nil)
+  (setf (board-d4 b) nil)
+  nil
+)
+
+(defmethod populate-with-pieces-for-col-win ((b board))
+  (setf (board-a1 b) nil)
+  (setf (board-a2 b) nil)
+  (setf (board-a3 b) *sbhs*)
+  (setf (board-a4 b) nil)
+  (setf (board-b1 b) nil)
+  (setf (board-b2 b) nil)
+  (setf (board-b3 b) *srss*)
+  (setf (board-b4 b) nil)
+  (setf (board-c1 b) nil)
+  (setf (board-c2 b) nil)
+  (setf (board-c3 b) *sbhc*)
+  (setf (board-c4 b) nil)
+  (setf (board-d1 b) nil)
+  (setf (board-d2 b) nil)
+  (setf (board-d3 b) *srsc*)
+  (setf (board-d4 b) nil)
+  nil
+)
+
+(defmethod populate-with-pieces-for-maj-win ((b board))
+  (setf (board-a1 b) *bbss*)
+  (setf (board-a2 b) nil)
+  (setf (board-a3 b) nil)
+  (setf (board-a4 b) nil)
+  (setf (board-b1 b) nil)
+  (setf (board-b2 b) *brhs*)
+  (setf (board-b3 b) nil)
+  (setf (board-b4 b) nil)
+  (setf (board-c1 b) nil)
+  (setf (board-c2 b) nil)
+  (setf (board-c3 b) *bbhc*)
+  (setf (board-c4 b) nil)
+  (setf (board-d1 b) nil)
+  (setf (board-d2 b) nil)
+  (setf (board-d3 b) nil)
+  (setf (board-d4 b) *brhc*)
+  nil
+)
+
+(defmethod populate-with-pieces-for-min-win ((b board))
+  (setf (board-a1 b) nil)
+  (setf (board-a2 b) nil)
+  (setf (board-a3 b) nil)
+  (setf (board-a4 b) *sbhs*)
+  (setf (board-b1 b) nil)
+  (setf (board-b2 b) nil)
+  (setf (board-b3 b) *brss*)
+  (setf (board-b4 b) nil)
+  (setf (board-c1 b) nil)
+  (setf (board-c2 b) *srss*)
+  (setf (board-c3 b) nil)
+  (setf (board-c4 b) nil)
+  (setf (board-d1 b) *srhs*)
+  (setf (board-d2 b) nil)
+  (setf (board-d3 b) nil)
+  (setf (board-d4 b) nil)
+  nil
+)
+
+(defmethod populate-with-pieces-for-no-win ((b board))
+  (setf (board-a1 b) *bbhs*)
+  (setf (board-a2 b) *bbss*)
+  (setf (board-a3 b) nil)
+  (setf (board-a4 b) nil)
+  (setf (board-b1 b) *sbss*)
+  (setf (board-b2 b) *brhs*)
+  (setf (board-b3 b) nil)
+  (setf (board-b4 b) nil)
+  (setf (board-c1 b) nil)
+  (setf (board-c2 b) nil)
+  (setf (board-c3 b) *bbsc*)
+  (setf (board-c4 b) *bbhc*)
+  (setf (board-d1 b) nil)
+  (setf (board-d2 b) nil)
+  (setf (board-d3 b) *srhc*)
+  (setf (board-d4 b) *srhc*)
+  nil
+)
+
+(defmethod task66--game-over-p-demo ()
+  (establish-pieces)
+  (let (state player1 player2 p1name p2name game)
+    (princ "Name of player 1? ") (setf p1name (read))
+	(princ "Name of player 2? ") (setf p2name (read))
+	(setf player1 (make-instance 'human-player :name p1name))
+	(setf player2 (make-instance 'human-player :name p2name))
+	(setf first-player (establish-first-player player1 player2))
+	(setf initial-state (make-instance 'state :player first-player))
+	(setf g (make-instance 'game
+	  :state initial-state
+	  :player1 player1
+	  :player2 player2
+	))
+	(populate-with-pieces-for-row-win (state-board (game-state g)))
+	(display g)
+	(format t "Game over? ~A~%" (game-over-p g))
+	(populate-with-pieces-for-col-win (state-board (game-state g)))
+	(display g)
+	(format t "Game over? ~A~%" (game-over-p g))
+	(populate-with-pieces-for-maj-win (state-board (game-state g)))
+	(display g)
+	(format t "Game over? ~A~%" (game-over-p g))
+	(populate-with-pieces-for-min-win (state-board (game-state g)))
+	(display g)
+	(format t "Game over? ~A~%" (game-over-p g))
+	(populate-with-pieces-for-no-win (state-board (game-state g)))
+	(display g)
+	(format t "Game over? ~A~%" (game-over-p g))
+	nil
+  )
+)
+
+(defmethod task69--change-player-demo ()
+  (establish-pieces)
+  (let (init-state first-player player1 player2 p1name p2name game)
+    (princ "Name of player 1? ") (setf p1name (read))
+	(princ "Name of player 2? ") (setf p2name (read))
+	(setf player1 (make-instance 'human-player :name p1name))
+	(setf player2 (make-instance 'human-player :name p2name))
+	(setf first-player (establish-first-player player1 player2))
+	(setf init-state (make-instance 'state :player first-player))
+	(setf g (make-instance 'game
+	  :state init-state
+	  :player1 player1
+	  :player2 player2
+	))
+	(display (current-player g))
+	(display (other-player g))
+	(format t "Change player ...~%")
+	(change-player g)
+	(display (current-player g))
+	(display (other-player g))
+	(format t "Change player ...~%")
+	(change-player g)
+	(display (current-player g))
+	(display (other-player g))
+  )
+)
+
+(defmethod task72--size-predicates-demo ()
+  (setf p (make-instance 'piece)) ;small blue hollow circle
+  (setf q (make-instance 'piece :size 'big))
+  (format t "P is small: ~A~%" (is-small-p p))
+  (format t "Q is small: ~A~%" (is-small-p q))
+  (format t "P is big: ~A~%" (is-big-p p))
+  (format t "Q is big: ~A~%" (is-big-p q))
+  nil
+)
+
+(defmethod task74--style-predicates-demo ()
+  (setf p (make-instance 'piece)) ;small blue hollow circle
+  (setf q (make-instance 'piece :style 'solid))
+  (format t "P is hollow: ~A~%" (is-hollow-p p))
+  (format t "Q is hollow: ~A~%" (is-hollow-p q))
+  (format t "P is solid: ~A~%" (is-solid-p p))
+  (format t "Q is solid: ~A~%" (is-solid-p q))
+  nil
+)
+
+(defmethod task76--shape-predicates-demo ()
+  (setf p (make-instance 'piece)) ;small blue hollow circle
+  (setf q (make-instance 'piece :shape 'square))
+  (format t "P is circle: ~A~%" (is-circle-p p))
+  (format t "Q is circle: ~A~%" (is-circle-p q))
+  (format t "P is square: ~A~%" (is-square-p p))
+  (format t "Q is square: ~A~%" (is-square-p q))
+  nil
+)
+
+(defmethod task81--filter-programs-demo ()
+  (establish-pieces)
+  (format t "Filtered by size, small: ~A~%" 
+    (mapcar #'get (make-list 8 :initial-element 'print-rep) 
+    (filter-size 'small *pieces*))
+  )
+  (format t "Filtered by size, big: ~A~%" 
+    (mapcar #'get (make-list 8 :initial-element 'print-rep) 
+    (filter-size 'big *pieces*))
+  )
+  (format t "Filtered by color, blue: ~A~%" 
+    (mapcar #'get (make-list 8 :initial-element 'print-rep) 
+    (filter-color 'blue *pieces*))
+  )
+  (format t "Filtered by color, red: ~A~%" 
+    (mapcar #'get (make-list 8 :initial-element 'print-rep) 
+    (filter-color 'red *pieces*))
+  )
+  (format t "Filtered by style, hollow: ~A~%" 
+    (mapcar #'get (make-list 8 :initial-element 'print-rep) 
+    (filter-style 'hollow *pieces*))
+  )
+  (format t "Filtered by style, solid: ~A~%" 
+    (mapcar #'get (make-list 8 :initial-element 'print-rep) 
+    (filter-style 'solid *pieces*))
+  )
+  (format t "Filtered by shape, circle: ~A~%" 
+    (mapcar #'get (make-list 8 :initial-element 'print-rep) 
+    (filter-shape 'circle *pieces*))
+  )
+  (format t "Filtered by shape, square: ~A~%" 
+    (mapcar #'get (make-list 8 :initial-element 'print-rep) 
+    (filter-shape 'square *pieces*))
+  )
+  nil
+)
+
+(defmethod task83--parse-piece-description-demo (&aux d p)
+  (establish-pieces)
+  (setf d '(big blue solid square))
+  (setf p (parse-piece-description d))
+  (format t "~A -> ~A~%" (write-to-string d) (to-string p))
+  (setf d '(big red solid circle))
+  (setf p (parse-piece-description d))
+  (format t "~A -> ~A~%" (write-to-string d) (to-string p))
+  (setf d '(blue square))
+  (setf p (parse-piece-description d))
+  (format t "~A -> ~A~%" (write-to-string d) (to-string p))  
+  (setf d '(big hollow circle))
+  (setf p (parse-piece-description d))
+  (format t "~A -> ~A~%" (write-to-string d) (to-string p))
+  nil
+)
+
+(defmethod task85--select-piece-demo (&aux player piece)
+  (establish-pieces)
+  (setf player (make-instance 'human-player :name 'x))
+  (setf piece (select-piece player))
+  (format t "Piece selected is ~A~%" (to-string piece))
+  (setf piece (select-piece player))
+  (format t "Piece selected is ~A~%" (to-string piece))
+  (setf piece (select-piece player))
+  (format t "Piece selected is ~A~%" (to-string piece))
+  (setf piece (select-piece player))
+  (format t "Piece selected is ~A~%" (to-string piece))
+  (setf piece (select-piece player))
+  (format t "Piece selected is ~A~%" (to-string piece))
+  nil  
+)
+
+(defmethod task87--available-locations-demo (&aux board)
+  (establish-pieces)
+  (setf board (make-instance 'board))
+  (populate-with-pieces-for-row-win board)
+  (princ (available-locations board))(terpri)
+  (populate-with-pieces-for-col-win board)
+  (princ (available-locations board))(terpri)
+  (populate-with-pieces-for-min-win board)
+  (princ (available-locations board))(terpri)
+  (populate-with-pieces-for-no-win board)
+  (available-locations board)
+)
+
+(defmethod populate-with-pieces-for-sld ((b board))
+  (setf (board-d1 b) *bbhs*)
+  (setf (board-c2 b) *bbss*)
+  (setf (board-b3 b) *sbhs*)
+  (setf (board-a4 b) *sbss*)
+  nil
+)
+
+(defmethod task89--select-location-demo ()
+  (establish-pieces)
+  (setf player (make-instance 'human-player :name 'x))
+  (setf board (make-instance 'board))
+  (setf piece *bbhs*)
+  (populate-with-pieces-for-sld board)
+  (format t "Quarto board with pieces for sld ...~%")
+  (display board)
+  (setf location (select-location player piece board))
+  (format t "Location selected is ~A~%" location)
+  nil
+)
+
+(defmethod task91--place-piece-on-board-demo ()
+  (establish-pieces)
+  (setf board (make-instance 'board))
+  (place-piece-on-board 'bbhc 'a1 *bbhc* board)
+  (display board)
+  (place-piece-on-board 'bbhs 'c1 *bbhs* board)
+  (display board)
+  (place-piece-on-board 'sbss 'a1 *sbss* board)
+  (display board)
+  (place-piece-on-board 'srsc 'b3 *srsc* board)
+  (display board)
+  nil  
+)
+
+(defmethod task93--place-piece-demo ()
+  (establish-pieces)
+  (setf player (make-instance 'human-player :name 'x))
+  (setf board (make-instance 'board))
+  (format t "Quarto board with pieces for ppd ...~%")
+  (display board)
+  (display-available-pieces)
+  (place-piece player *brhs* board)
+  (display board)
+  (display-available-pieces)
+  (place-piece player *brsc* board)
+  (display board)
+  (display-available-pieces)
+  (place-piece player *srhs* board)
+  (display board)
+  (display-available-pieces)
+  (place-piece player *brhc* board)
+  (display board)
+  (display-available-pieces)
+  (place-piece player *sbhs* board)
+  (display board)
+  (display-available-pieces)
+  nil
+)
+
+(defmethod task94--make-move-demo ()
+  (establish-pieces)
+  (let (state player1 player2 p1name p2name game)
+    (princ "Name of player 1? ")(setf p1name (read))
+	(princ "Name of player 2? ")(setf p2name (read))
+	(setf player1 (make-instance 'human-player :name p1name))
+	(setf player2 (make-instance 'human-player :name p2name))
+	(setf first-player (establish-first-player player1 player2))
+	(setf initial-state (make-instance 'state :player first-player))
+	(setf g (make-instance 'game
+	  :state initial-state
+	  :player1 player1
+	  :player2 player2
+	))
+	(display g)
+	(format t "Move 1~%")
+	(make-move g)
+	(display g)
+	(format t "Move 2~%")
+	(make-move g)
+	(display g)
+	(format t "Move 3~%")
+	(make-move g)
+	(display g)
+	(format t "Move 4~%")
+	(make-move g)
+	(display g)	
+	nil
+  )
+)
+
+(defmethod task95--move-demo ()
+  (establish-pieces)
+  (let (state player1 player2 p1name p2name game)
+    (princ "Name of player 1? ")(setf p1name (read))
+	(princ "Name of player 2? ")(setf p2name (read))
+	(setf player1 (make-instance 'human-player :name p1name))
+	(setf player2 (make-instance 'human-player :name p2name))
+	(setf first-player (establish-first-player player1 player2))
+	(setf initial-state (make-instance 'state :player first-player))
+	(setf g (make-instance 'game
+	  :state initial-state
+	  :player1 player1
+	  :player2 player2
+	))
+	(display g)
+	(format t "Move 1~%")
+	(move g)
+	(display g)
+	(format t "Move 2~%")
+	(move g)
+	(display g)
+	(format t "Move 3~%")
+	(move g)
+	(display g)
+	(format t "Move 4~%")
+	(move g)
+	(display g)	
+	nil
+  )
+)
+
+(defmethod task97--wind-up-game-demo ()
+  (establish-pieces)
+  (let (state player1 player2 p1name p2name game)
+    (princ "Name of player 1? ")(setf p1name (read))
+	(princ "Name of player 2? ")(setf p2name (read))
+	(setf player1 (make-instance 'human-player :name p1name))
+	(setf player2 (make-instance 'human-player :name p2name))
+	(setf first-player (establish-first-player player1 player2))
+	(setf initial-state (make-instance 'state :player first-player))
+	(setf g (make-instance 'game
+	  :state initial-state
+	  :player1 player1
+	  :player2 player2
+	))
+	(display g)
+	(wind-up-game g)
+  )
+)
+
+(defmethod task98--play-demo (&aux g)
+  (setf g (h-h-game))
+  (play g)
+  nil
+)

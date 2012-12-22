@@ -1,0 +1,231 @@
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "qtests.lsp")
+;; Loading file qtests.lsp ...
+;;  Loading file quarto.lsp ...
+;;   Loading file lp.lsp ...
+;;   Loaded file lp.lsp
+;;  Loaded file quarto.lsp
+;; Loaded file qtests.lsp
+T
+[2]> (task29--player-demo)
+< PLAYER NAME=HOBBIT >
+< PLAYER NAME=HARRY >
+NIL
+[3]> (task31--state-demo)
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+Current player = DEMARKUS
+NIL
+[4]> (task33--game-demo)
+< PLAYER NAME=ONE >
+< PLAYER NAME=TWO >
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+Current player = ONE
+NIL
+[5]> (task35--h-h-game-demo)
+Name of player 1? mark
+Name of player 2? bob
+Who will move first, MARK or BOB? bob
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** **** **** ****
+C   **** **** **** ****
+B   **** **** **** ****
+A   **** **** **** ****
+     1    2    3    4
+Current player = BOB
+NIL
+[6]> (task39--same-size-p-demo)
+For [B-] and [R-] the same size result = T
+For [b-] and [r-] the same size result = T
+For [B-] and [r-] the same size result = NIL
+For [b-] and [R-] the same size result = NIL
+NIL
+[7]> (task41--same-color-p-demo)
+For [B-] and [b-] the same color result = T
+For [B-] and [B+] the same color result = T
+For [B-] and [r-] the same color result = NIL
+For [b-] and [R-] the same color result = NIL
+NIL
+[8]> (task43--same-style-p-demo)
+For [B-] and [R-] the same style result = T
+For [b+] and [r+] the same style result = T
+For [B-] and [r+] the same style result = NIL
+For [b+] and [R-] the same style result = NIL
+NIL
+[9]> (task43--same-shape-p-demo)
+
+*** - EVAL: undefined function TASK43--SAME-SHAPE-P-DEMO
+The following restarts are available:
+USE-VALUE      :R1      Input a value to be used instead of (FDEFINITION 'TASK43
+--SAME-SHAPE-P-DEMO).
+RETRY          :R2      Retry
+STORE-VALUE    :R3      Input a new value for (FDEFINITION 'TASK43--SAME-SHAPE-P
+-DEMO).
+ABORT          :R4      Abort main loop
+Break 1 [10]> :a
+[11]> (task45--same-shape-p-demo)
+For [B-] and [R-] the same shape result = T
+For (b-) and (r-) the same shape result = T
+For [B-] and (r-) the same shape result = NIL
+For (b-) and [R-] the same shape result = NIL
+NIL
+[12]> (task47--uniform-p-demo)
+(THIS THIS THIS THIS THIS) is uniform? T
+(THIS THAT THE OTHER) is uniform? NIL
+NIL
+[13]> (task49--uniform-size-p-demo)
+((B-) [R+] [R+] (R-)) is uniform in size? T
+((b-) [r+] [r+] (r-)) is uniform in size? T
+((B-) [R+] [r+] (R-)) is uniform in size? NIL
+NIL
+[14]> (task51--uniform-color-p-demo)
+((B-) [b+] [B+] (b-)) is uniform in color? T
+((R-) [r+] [R+] (r-)) is uniform in color? T
+((B-) [R+] [r+] (R-)) is uniform in color? NIL
+NIL
+[15]> (task53--uniform-style-p-demo)
+((B+) [R+] [R+] (R+)) is uniform in style? T
+((b-) [r-] [r-] (r-)) is uniform in style? T
+((B-) [R+] [r+] (R-)) is uniform in style? NIL
+NIL
+[16]> (task55--uniform-shape-p-demo)
+([B-] [R+] [R+] [R-]) is uniform in shape? T
+((b-) (r+) (r+) (r-)) is uniform in shape? T
+((B-) [R+] [r+] (R-)) is uniform in shape? NIL
+NIL
+[17]> (task57--similar-pieces-p-demo)
+The set ((B+) (R+) (b-)) are similar? T
+The set ((B+) (R+) [B-]) are similar? T
+The set ((B+) [B-] (b+)) are similar? T
+The set ((B+) [R+] (b+)) are similar? T
+The set ((B+) (R-) [b+]) are similar? NIL
+NIL
+[18]> (task59--four-similar-pieces-demo)
+The line ([B+] [b+] (R+) (r+)) consists of four similar pieces? T
+The line ([B+] [b+] NIL [r+]) consists of four similar pieces? NIL
+The line ([B+] [b+] (R+) (r-)) consists of four similar pieces? NIL
+NIL
+[19]> (task61--four-in-a-row-demo)
+Quarto board with four in a row...
+D   (r-) **** (r-) ****
+C   **** [r+] (B-) (B+)
+B   [b+] [R-] [R+] [r-]
+A   [B-] [B+] [b-] ****
+     1    2    3    4
+Four in a row? T
+Quarto board with nothing...
+D   (r-) **** (r-) (b+)
+C   **** [r+] (B-) (B+)
+B   (b+) [R-] [R+] [r-]
+A   [B-] [B+] [b-] ****
+     1    2    3    4
+Four in a row? NIL
+NIL
+[20]> (task63--four-in-a-col-demo)
+Quarto board with four in a column...
+D   (r-) **** (r-) ****
+C   **** [r+] (B-) (B+)
+B   (b+) [R+] [R-] [r-]
+A   [B-] [B+] [b-] ****
+     1    2    3    4
+Four in a column? T
+Quarto board with nothing...
+D   (r-) **** (r-) (b+)
+C   **** [r+] (B-) (B+)
+B   (b+) [R-] [R+] [r-]
+A   [B-] [B+] [b-] ****
+     1    2    3    4
+Four in a column? NIL
+NIL
+[21]> (task65--four-in-a-diagonal-demo)
+Quarto board with four in a diagonal...
+D   (r-) **** (r-) ****
+C   **** [r+] (B-) (B+)
+B   [b+] [R-] [R+] [r-]
+A   [B-] [B+] [b-] (R+)
+     1    2    3    4
+Four in a diagonal? T
+Quarto board with nothing...
+D   (r-) **** (r-) (b+)
+C   **** [r+] (B-) (B+)
+B   (b+) [R-] [R+] [r-]
+A   [B-] [B+] [b-] ****
+     1    2    3    4
+Four in a diagonal? NIL
+NIL
+[22]> (task66--game-over-p-demo)
+Name of player 1? mark
+Name of player 2? bob
+Who will move first, MARK or BOB? mark
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** **** **** ****
+C   **** **** **** ****
+B   [R+] (r-) [r+] (R-)
+A   **** **** **** ****
+     1    2    3    4
+Current player = MARK
+Game over? T
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** **** (r+) ****
+C   **** **** (b-) ****
+B   **** **** [r+] ****
+A   **** **** [b-] ****
+     1    2    3    4
+Current player = MARK
+Game over? T
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** **** **** (R-)
+C   **** **** (B-) ****
+B   **** [R-] **** ****
+A   [B+] **** **** ****
+     1    2    3    4
+Current player = MARK
+Game over? T
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   [r-] **** **** ****
+C   **** [r+] **** ****
+B   **** **** [R+] ****
+A   **** **** **** [b-]
+     1    2    3    4
+Current player = MARK
+Game over? T
+< PLAYER NAME=MARK >
+< PLAYER NAME=BOB >
+D   **** **** (r-) (r-)
+C   **** **** (B+) (B-)
+B   [b+] [R-] **** ****
+A   [B-] [B+] **** ****
+     1    2    3    4
+Current player = MARK
+Game over? NIL
+NIL
+[23]>

@@ -1,0 +1,29 @@
+; anw.lsp
+; A program for computing the area of a Norman Window.
+;
+; Mark Willson
+; 9-10-12
+
+; anw - function for computing area of window
+
+(defun anw (width height)
+  (+ (rect-area width height) (circ-area width))
+)
+
+; rect-area - function for computing area of base rectangle
+
+(defun rect-area (width height)
+  (* width height)
+)
+
+; circ-area - function for computing area of top semicircle
+
+(defun circ-area (width)
+  (/ (* (square (/ width 2)) pi) 2)
+)
+
+; square - function for computing square of a number
+
+(defun square (x)
+ (* x x)
+)

@@ -1,0 +1,268 @@
+; quarto.lsp
+;
+; A framework for playing the game quarto.
+;
+; Mark Willson
+
+;------------------------------------------------------------------------------
+; List Processing Utility Library
+
+(load "lp.lsp")
+
+;------------------------------------------------------------------------------
+; Quarto piece modeling
+
+(defclass piece ()
+  (
+    (size :accessor piece-size :initarg :size :initform 'small)
+	(color :accessor piece-color :initarg :color :initform 'blue)
+	(style :accessor piece-style :initarg :style :initform 'hollow)
+	(shape :accessor piece-shape :initarg :shape :initform 'circle)
+  )
+)
+
+(defmethod display ((p piece))
+  (format t "piece: size=~A color=~A style=~A shape=~A~%"
+    (piece-size p)
+	(piece-color p)
+	(piece-style p)
+	(piece-shape p)
+  )
+)
+
+(defmethod to-string ((p piece))
+  (get 'print-rep p)
+)
+
+(defmethod is-red-p ((p piece))
+  (equal (piece-color p) 'red)
+)
+
+(defmethod is-blue-p ((p piece))
+  (equal (piece-color p) 'blue)
+)
+
+;------------------------------------------------------------------------------
+; Establish pieces for the game
+
+(defmethod establish-pieces ()
+  (setf *bbhc* (make-instance 'piece :size 'big))
+  (setf (get 'print-rep *bbhc*) "(B-)")
+  (setf *bbhs* (make-instance 'piece :size 'big :shape 'square))
+  (setf (get 'print-rep *bbhs*) "[B-]")
+  (setf *bbsc* (make-instance 'piece :size 'big :style 'solid))
+  (setf (get 'print-rep *bbsc*) "(B+)")
+  (setf *bbss* (make-instance 'piece :size 'big :shape 'square :style 'solid))
+  (setf (get 'print-rep *bbss*) "[B+]")
+  (setf *brhc* (make-instance 'piece :size 'big :color 'red))
+  (setf (get 'print-rep *brhc*) "(R-)")
+  (setf *brhs* (make-instance 'piece :size 'big :color 'red :shape 'square))
+  (setf (get 'print-rep *brhs*) "[R-]")
+  (setf *brsc* (make-instance 'piece :size 'big :color 'red :style 'solid))
+  (setf (get 'print-rep *brsc*) "(R+)")
+  (setf *brss* (make-instance 'piece :size 'big :color 'red :shape 'square :style 'solid))
+  (setf (get 'print-rep *brss*) "[R+]")
+  (setf *sbhc* (make-instance 'piece))
+  (setf (get 'print-rep *sbhc*) "(b-)")
+  (setf *sbhs* (make-instance 'piece :shape 'square))
+  (setf (get 'print-rep *sbhs*) "[b-]")
+  (setf *sbsc* (make-instance 'piece :style 'solid))
+  (setf (get 'print-rep *sbsc*) "(b+)")
+  (setf *sbss* (make-instance 'piece :shape 'square :style 'solid))
+  (setf (get 'print-rep *sbss*) "[b+]")
+  (setf *srhc* (make-instance 'piece :color 'red))
+  (setf (get 'print-rep *srhc*) "(r-)")
+  (setf *srhs* (make-instance 'piece :color 'red :shape 'square))
+  (setf (get 'print-rep *srhs*) "[r-]")
+  (setf *srsc* (make-instance 'piece :color 'red :style 'solid))
+  (setf (get 'print-rep *srsc*) "(r+)")
+  (setf *srss* (make-instance 'piece :color 'red :shape 'square :style 'solid))
+  (setf (get 'print-rep *srss*) "[r+]")
+  (setf *pieces* (list *bbhc* *bbhs* *bbsc* *bbss* *brhc* *brhs* *brsc* *brss*
+                  *sbhc* *sbhs* *sbsc* *sbss* *srhc* *srhs* *srsc* *srss*))
+  (setf *avail* (copy-tree *pieces*))
+)
+
+(defmethod display-available-pieces ()
+  (format t "~A~%~A~%"
+    (to-string (mapcar #'to-string (filter-in #'is-red-p *avail*)))
+	(to-string (mapcar #'to-string (filter-in #'is-blue-p *avail*)))
+  )
+)
+
+;------------------------------------------------------------------------------
+; Board modeling
+
+(defclass board ()
+  (
+    (d1 :accessor board-d1 :initarg :d1 :initform nil)
+    (d2 :accessor board-d2 :initarg :d2 :initform nil)
+    (d3 :accessor board-d3 :initarg :d3 :initform nil)
+    (d4 :accessor board-d4 :initarg :d4 :initform nil)
+    (c1 :accessor board-c1 :initarg :c1 :initform nil)
+    (c2 :accessor board-c2 :initarg :c2 :initform nil)
+    (c3 :accessor board-c3 :initarg :c3 :initform nil)
+    (c4 :accessor board-c4 :initarg :c4 :initform nil)
+    (b1 :accessor board-b1 :initarg :b1 :initform nil)
+    (b2 :accessor board-b2 :initarg :b2 :initform nil)
+    (b3 :accessor board-b3 :initarg :b3 :initform nil)
+    (b4 :accessor board-b4 :initarg :b4 :initform nil)
+    (a1 :accessor board-a1 :initarg :a1 :initform nil)
+    (a2 :accessor board-a2 :initarg :a2 :initform nil)
+    (a3 :accessor board-a3 :initarg :a3 :initform nil)
+    (a4 :accessor board-a4 :initarg :a4 :initform nil)
+  )
+)
+
+(defmethod display-board-objects ((b board))
+  (format t "d1=~A d2=~A d3=~A d4=~A ~%"
+    (board-d1 b) (board-d2 b) (board-d3 b) (board-d4 b)
+  )
+  (format t "c1=~A c2=~A c3=~A c4=~A ~%"
+    (board-c1 b) (board-c2 b) (board-c3 b) (board-c4 b)
+  )
+  (format t "b1=~A b2=~A b3=~A b4=~A ~%"
+    (board-b1 b) (board-b2 b) (board-b3 b) (board-b4 b)
+  )
+  (format t "a1=~A a2=~A a3=~A a4=~A ~%"
+    (board-a1 b) (board-a2 b) (board-a3 b) (board-a4 b)
+  )  
+  nil
+)
+
+(defmethod board-row ((r symbol) (b board))
+  (cond
+    ((eq r 'd) (board-row-d b))
+	((eq r 'c) (board-row-c b))
+	((eq r 'b) (board-row-b b))
+	((eq r 'a) (board-row-a b))
+  )
+)
+
+(defmethod board-row-d ((b board))
+ (list (board-d1 b) (board-d2 b) (board-d3 b) (board-d4 b))
+)
+
+(defmethod board-row-c ((b board))
+ (list (board-c1 b) (board-c2 b) (board-c3 b) (board-c4 b))
+)
+
+(defmethod board-row-b ((b board))
+ (list (board-b1 b) (board-b2 b) (board-b3 b) (board-b4 b))
+)
+
+(defmethod board-row-a ((b board))
+ (list (board-a1 b) (board-a2 b) (board-a3 b) (board-a4 b))
+)
+
+(defmethod board-col ((r integer) (b board))
+  (cond
+    ((eq r 1) (board-col-1 b))
+	((eq r 2) (board-col-2 b))
+	((eq r 3) (board-col-3 b))
+	((eq r 4) (board-col-4 b))
+  )
+)
+
+(defmethod board-col-1 ((b board))
+ (list (board-d1 b) (board-c1 b) (board-b1 b) (board-a1 b))
+)
+
+(defmethod board-col-2 ((b board))
+ (list (board-d2 b) (board-c2 b) (board-b2 b) (board-a2 b))
+)
+
+(defmethod board-col-3 ((b board))
+ (list (board-d3 b) (board-c3 b) (board-b3 b) (board-a3 b))
+)
+
+(defmethod board-col-4 ((b board))
+ (list (board-d4 b) (board-c4 b) (board-b4 b) (board-a4 b))
+)
+
+(defmethod board-diagonal ((r symbol) (b board))
+  (cond
+    ((eq r 'major)
+	  (board-diagonal-major b)
+	)
+	((eq r 'minor)
+	  (board-diagonal-minor b)
+	)
+  )
+)
+
+(defmethod board-diagonal-major ((b board))
+  (list (board-a1 b) (board-b2 b) (board-c3 b) (board-d4 b))
+)
+
+(defmethod board-diagonal-minor ((b board))
+  (list (board-d1 b) (board-c2 b) (board-b3 b) (board-a4 b))
+)
+
+(defmethod display ((b board))
+  (format t "D   ~A~%" (to-board-row-string (board-row-d b)))
+  (format t "C   ~A~%" (to-board-row-string (board-row-c b)))
+  (format t "B   ~A~%" (to-board-row-string (board-row-b b)))
+  (format t "A   ~A~%" (to-board-row-string (board-row-a b)))
+  (format t "     1    2    3    4 ~%")
+  nil
+)
+
+(defmethod padded-piece-or-empty-string ((pn t))
+  (cond
+    ((null pn)
+	  "**** "
+	)
+	((eq (type-of pn) 'piece)
+	  (concatenate 'string (to-string pn) " ")
+	)
+	(t
+	  "???? "
+	)
+  )
+)
+
+(defmethod to-board-row-string ((row list))
+  (setf string-list (mapcar #'padded-piece-or-empty-string row))
+  (apply #'concatenate 'string string-list)
+)
+
+;------------------------------------------------------------------------------
+; Helper functions
+
+(defmethod to-string ((lst list))
+  (cond
+    ((null lst)
+	  ""
+	)
+    (t
+	  (concatenate 'string 
+	    (concatenate 'string (string (car lst)) " ") 
+	    (to-string (cdr lst))
+	  )
+	)
+  )	
+) 
+
+;------------------------------------------------------------------------------
+; Player classes
+
+(defclass player ()
+  (
+    (name :accessor player-name :initarg :name)
+  )
+)
+
+(defclass human-player (player) ())
+
+(defclass r-machine-player (player) ())
+
+(defclass h-machine-player (player) ())
+
+(defclass m-machine-player (player) ())
+
+(defmethod display ((p player))
+  (format t "< PLAYER NAME=~A >~%" (player-name p))
+)
+
+;------------------------------------------------------------------------------

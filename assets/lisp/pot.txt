@@ -1,0 +1,35 @@
+; pot.lsp
+; A program for computing the perimeter of a triangle.
+;
+; Mark Willson
+; 9-10-12
+
+; pot - function for computing perimeter
+
+(defun pot (pointlist)
+  (let (p1 p2 p3 l1 l2 l3)
+    (setf p1 (first pointlist))
+    (setf p2 (second pointlist))
+    (setf p3 (third pointlist))
+	(setf l1 (distance p1 p2))
+	(setf l2 (distance p2 p3))
+	(setf l3 (distance p1 p3))
+	(+ l1 l2 l3)
+  )
+)
+
+; distance - function for computing distance between two points
+
+(defun distance (p1 p2)
+  (let (x1 x2 y1 y2)
+    (setf x1 (car p1) y1 (cadr p1))
+	(setf x2 (car p2) y2 (cadr p2))
+	(sqrt (+ (square (- x2 x1)) (square (- y2 y1))))
+  )
+)
+
+; square - function for computing square of a number
+
+(defun square (x)
+  (* x x)
+)
