@@ -1,18 +1,8 @@
-Mark Willson
-IGN Code Foo Application
-Version: 1.0
+Oswego Course Website
 
-README
+This site contains my work for the introductory artificial intelligence
+classes I took at SUNY Oswego. The site itself is live at: 
 
-Instructions: 
-1. Open "index.html" in browser of choice.
-2. Enjoy :)
+http://moxie.oswego.edu/~mwillson
 
-
-
-CONTACT INFO
-
-Mark Willson
-162 Wainwright Ave. Syracuse, NY 13208
-mwillson@oswego.edu
-(315)561-6140
+Check it out for some LISP code and links to cool LISP resources!
